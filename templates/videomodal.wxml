@@ -1,0 +1,13 @@
+<view wx:if="{{_modal_.showVideoModal}}" class="win-bz" catchtap="closeVideoModal"></view>
+<view animation="{{_modal.vVideoAnimationData}}" class="vedio-modal">
+    <view class="vedio-modal-content">
+        <form bindsubmit="selectProduct" report-submit="true">
+            <text class="video-title">请输入开通会员账号</text>
+            <input type="text" maxlength="64" value="{{vPhoneNum}}" focus="{{autoFocus}}" bindinput="phoneNumChange" />
+            <text class="video-tips">{{vRechargeLimit}}</text>
+
+            <button wx:if="{{vPhoneNum}}" class="vedio-modal-buy-bt" formType="submit">确认开通</button>
+            <button wx:if="{{!vPhoneNum}}" class="vedio-modal-buy-bt-disable">确认开通</button>
+        </form>
+    </view>
+</view>

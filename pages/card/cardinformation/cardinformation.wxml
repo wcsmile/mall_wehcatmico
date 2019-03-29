@@ -1,0 +1,89 @@
+<scroll-view scroll-y class="information-containers">
+    <view class="card-empty"></view>
+    <view class="information-top">
+        <text class="informations-text">请拍摄并上传身份证</text>
+        <view class="information-card">
+            <view class="information-cards">
+                <view class="information-cards-item" bindtap="gotoChooseImage" data-index="{{1}}">
+                    <image src="{{faceImage}}"></image>
+                    <text>点击上传带头像一面</text>
+                </view>
+                <view class="information-cards-item" bindtap="gotoChooseImage" data-index="{{2}}">
+                    <image src="{{backImage}}"></image>
+                    <text>点击上传带国徽一面</text>
+                </view>
+            </view>
+            <text>请确认您的个人信息，若有误请点击修改</text>
+        </view>
+        <view class="information-line" ></view>
+    </view>
+    <view class="information-item" bindtap="gotoMessage">
+        <text class="information-text">身份证信息</text>
+        <view class="information-msg-tip" wx:if="{{!userName}}">
+            <text>请填写身份证信息</text>
+        </view>
+        <view class="information-msg" wx:if="{{userName}}">
+            <view class="information-msg-user">
+                <text>{{userName}}</text><text style="font-size: 34rpx;">{{IDcards}}</text>
+            </view>
+            <view class="information-msg-address">
+                <text>{{IDallAddr}}</text>
+            </view>
+        </view>
+        <i class="iconfont icon-right-arrow"></i>
+    </view>
+    <view class="information-lines">
+        <view class="information-line-line"></view>
+    </view>
+    <view class="information-item">
+        <text class="information-text">手机号码</text>
+        <input type="number" maxlength="11" value="{{phone}}" cursor-spacing="60" placeholder="重要信息，请如实填写" adjust-position="true" placeholder-style="color:#d0d0d0; font-size:32rpx;" bindinput="inputPhone"/>
+    </view>
+    
+    <view>
+        <view class="card-empty"></view>
+        <view hidden>
+            <view class="information-item">
+                <text class="information-text">预设密码</text>
+                <input type="number" maxlength="6" value="{{pwd}}" cursor-spacing="60" placeholder="建议预设（选填）" adjust-position="true" placeholder-style="color:#d0d0d0" bindinput="inputPwd"/>
+            </view>
+            <view class="information-lines">
+                <view class="information-line-line"></view>
+            </view>
+            <view class="information-item" bindtap="actionSheetTap">
+                <text class="information-text">预充值金额</text>
+                <text class="information-content" style="color: #d0d0d0" wx:if="{{!itemHandFee}}">请选择充值金额</text>
+                <text class="information-content" wx:if="{{itemHandFee}}">{{itemHandFee}}</text>
+                <i class="iconfont icon-icarrow color-i color-gray"></i>
+            </view>
+            <view class="information-lines">
+                <view class="information-line-line"></view>
+            </view>
+        </view>
+        <view class="information-item">
+            <text class="information-text">手续费</text>
+            <text class="information-content">{{serviceCharge}}</text>
+        </view>
+    </view>
+    <view class="card-empty"></view>
+    <view class="information-item" bindtap="gotoAddress">
+        <text class="information-text">收货地址</text>
+        <view class="submitorder-addr-no">
+            <text wx:if="{{!receivingName}}">请填写省内收货地址</text>
+        </view>
+        <view class="information-msg" wx:if="{{receivingName}}">
+            <view class="information-msg-user">
+                <text>{{receivingName}}</text><text style="font-size: 34rpx;">{{reveivingPhone}}</text>
+            </view>
+            <view class="information-msg-address">
+                <text>{{receivingProvinceName}}{{receivingCityName}}{{receivingAreaName}}{{receivingTownName}}{{receivingAddress}}</text>
+            </view>
+        </view>
+        <i class="iconfont icon-right-arrow"></i>
+    </view>
+
+    <view class="card-btn" bindtap="gotoSuccess">
+        <view>提交办卡申请</view>
+    </view>
+</scroll-view>
+<include src="/templates/dialog.wxml" />

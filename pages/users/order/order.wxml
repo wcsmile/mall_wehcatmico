@@ -1,0 +1,77 @@
+<include src="/templates/dialog.wxml" />
+<view class="order-container">
+    <view class="order-top">
+        <view class="order-choose-tab" wx:if="{{clickTab == 0}}">
+            <view class="order-choose-item">
+                <a class="active">全部</a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="1" bindtap="switchTab">待付款</a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="2" bindtap="switchTab">已付款</a>
+            </view>
+        </view>  
+        <view class="order-choose-tab" wx:if="{{clickTab == 1}}">
+            <view class="order-choose-item">
+                <a data-type="0" bindtap="switchTab">全部</a>
+            </view>
+            <view class="order-choose-item">
+                <a class="active">待付款</a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="2" bindtap="switchTab">已付款</a>
+            </view>
+        </view>  
+        <view class="order-choose-tab" wx:if="{{clickTab == 2}}">
+            <view class="order-choose-item">
+                <a data-type="0" bindtap="switchTab">全部</a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="1" bindtap="switchTab">待付款</a>
+            </view>
+            <view class="order-choose-item">
+                <a class="active">已付款</a>
+            </view>
+        </view>
+    </view>
+
+    <view class="order-containers">
+        <block wx:if="{{requestComplete}}">
+            <view class="order-empty" wx:if="{{vCurrentOrderList.length==0}}">
+                <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                <text>暂无订单</text>
+            </view>
+            <view wx:if="{{vCurrentOrderList.length>0}}" class="order-item" wx:for="{{vCurrentOrderList}}" wx:key="{{index}}">
+                <view class="order-item-top">
+                    <text style="font-size:30rpx;">{{item.create_time}}</text>
+                    <text class="order-item-top-pay" style="color: #ff8400">{{item.payStatus}}</text>
+                </view>
+                <view class="order-item-middle" bindtap="gotoOrderDetail" data-index="{{item.order_no}}" data-type="{{goodsItem.product_type}}" wx:for="{{item.product_details}}" wx:key="{{goodsItem.product_id}}" wx:for-item="goodsItem">
+                    <image src="{{goodsItem.cover_img}}"></image>
+                    <view class="order-item-middle-desc">
+                        <text>{{goodsItem.product_name}}</text>
+                        <view>
+                            <text class="order-item-middle-price">¥{{goodsItem.sale_prices}}</text>
+                            <text class="order-item-middle-face-price">¥{{goodsItem.face}}</text>
+                        </view>
+                    </view>
+                    <view class="order-item-middle-num">
+                        <text>×{{goodsItem.product_num}}</text>
+                        <i class="iconfont icon-right-arrow"></i>
+                    </view>
+                </view>
+                <view class="order-item-bottom">
+                    <text class="order-item-total" style="color: #888;">合计：<text class="order-item-total">¥{{item.pay_amounts}}</text></text>
+                    <view class="order-item-bottom-item">
+                        <text class="order-item-bottom-btn" wx:if="{{(item.detail_status == 0 || item.detail_status == 20 || item.detail_status == 21) && (item.product_type == 4 || item.product_type == 10 || item.product_type == 11)}}" bindtap="gotoLogistics" data-order="{{item}}">查看物流</text>
+                        <text class="order-item-bottom-btn" wx:if="{{item.detail_status == 21}}" bindtap="gotoEvaluate" data-order="{{item}}">评价</text>
+                        <text class="order-item-bottom-btn" wx:if="{{item.detail_status == 11}}" bindtap="gotoPay" data-order="{{item}}">继续付款</text>
+                        <text class="order-item-bottom-btn" wx:if="{{item.detail_status == 20}}" bindtap="gotoSure" data-order="{{item}}">确认收货</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+<include src="/templates/guidemodal.wxml" />

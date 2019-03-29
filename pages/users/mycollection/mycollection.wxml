@@ -1,0 +1,24 @@
+<view class="mycollection-container">
+    <view class="home-center">
+        <block>
+            <view class="goods-empty" wx:if="{{mGoodsList.length==0}}">
+                <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                <text>暂无关注商品</text>
+            </view>
+            <view class="mall-goods-list" style="margin-top: 6rpx;">
+                <view wx:if="{{mGoodsList.length>0}}" class="home-center-item" wx:for="{{mGoodsList}}" wx:key="index" bindtap="gotoDetail" data-product-id="{{item.product_id}}" data-type="{{item.product_type}}">
+                    <view class="home-center-let">
+                        <image src="{{item.cover_img}}" />
+                    </view>
+                    <view class="home-center-right">                          
+                        <text class="home-center-name">{{item.product_name}}</text>
+                        <view>
+                            <text class="home-center-now-price">¥{{item.goods_sale_price}}</text>
+                            <text class="home-center-price" wx:if="{{item.goods_sale_price != item.face}}">¥{{item.face}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

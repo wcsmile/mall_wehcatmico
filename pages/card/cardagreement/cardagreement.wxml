@@ -1,0 +1,10 @@
+<scroll-view scroll-y class="agreement-containers">
+    <view class="card-empty"></view>
+    <view class="agreement-content">
+        <text>{{description}}</text>
+    </view>
+
+    <view class="card-btn" bindtap="gotoAgreement">
+        <view>同意</view>
+    </view>
+</scroll-view>

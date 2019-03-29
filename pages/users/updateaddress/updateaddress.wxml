@@ -1,0 +1,54 @@
+<view class="updateaddress-container">
+    <view class="address-content">
+        <view class="address-item">
+            <text>姓名</text>
+            <input type="text" maxlength="6" bindinput="inputNmae" bindfocus="cancelAddress" value="{{name}}"/>
+        </view>
+        <view class="address-item">
+            <text>手机号码</text>
+            <input type="number" maxlength="11" bindinput="inputPhone" bindfocus="cancelAddress" value="{{phone}}"/>
+        </view>
+        <view class="address-item">
+            <text>所在地区</text>
+            <!-- <picker mode="region" bindchange="bindRegionChange" value="{{province}}{{city}}{{area}}">
+                <view class="picker-region" wx:if="{{province}}">
+                    <text class="picker-region-text">{{province}}{{city}}{{area}}</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+                <view class="picker-tip" wx:if="{{!province}}">
+                    <text class="picker-tip-text">请选择</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+            </picker> -->
+
+            <view class="address-item-addr" bindtap="gotoChooseAddress">
+                <view class="picker-region" wx:if="{{province}}">
+                    <text class="picker-region-text">{{province}}{{city}}{{area}}{{town}}</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+                <view class="picker-tip" wx:if="{{!province}}">
+                    <text class="picker-tip-text">请选择</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+            </view>
+        </view>
+        <view class="address-item" style="border: none;">
+            <text style="height: 160rpx; line-height: 160rpx;">详细地址</text>
+            <textarea class="address-item-textarea" fixed="true" type="text" maxlength="64" bindinput="inputAddress" bindfocus="cancelAddress" value="{{address}}"></textarea>
+        </view>
+    </view>
+
+    <view class="card-agreenment">
+        <view>
+            <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!isChecked}}" bindtap="changeStatus" data-type="1"></image>
+            <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{isChecked}}" bindtap="changeStatus" data-type="2"></image>
+            <text>设为默认</text>
+        </view>
+    </view>
+
+    <view class="updateaddr-add">
+        <view bindtap="gotoSureAddress">确定</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />
+<include src="/templates/address.wxml" />

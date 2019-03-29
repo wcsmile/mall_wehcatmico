@@ -1,0 +1,22 @@
+<view class="record-container">
+    <block>
+        <view class="record-empty" wx:if="{{mRecordList.length==0}}">
+            <image src="http://static.100bm.cn/mall/ui/default/no-data.png" mode="widthFix"></image>
+            <text>暂无兑换记录</text>
+        </view>
+        <view wx:if="{{mRecordList.length>0}}" class="record-item" wx:for="{{mRecordList}}" wx:key="record_no" bindtap="gotoDetail">
+            <view class="record-top">
+                <text class="record-name">{{item.record_name}}</text>
+                <text class="record-num">{{item.record_num}}</text>
+            </view>
+            <view class="common-line"></view>
+            <view class="record-bottom">
+                <text class="record-date">{{item.record_date}}</text>
+                <text class="record-phone">{{item.record_phone}}</text>
+            </view>
+        </view>
+        <view class="record-desc">
+            <text>无更多兑换记录</text>
+        </view>
+    </block>
+</view>

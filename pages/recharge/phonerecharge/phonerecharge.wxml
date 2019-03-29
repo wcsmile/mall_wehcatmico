@@ -1,0 +1,60 @@
+<view class="charge-containers">
+    <view class="charge-empty"></view>
+    <!--输入框-->
+    <view class="phone-number-container">
+        <view class="input-icon"></view>
+        <view class="clear-input" bindtap="clearInput">
+            <i class="iconfont icon-delete" wx:if="{{vPhoneNum}}"></i>
+        </view>
+        <input type="number" maxlength="13" focus="{{vInputFocus}}" value="{{vPhoneNum}}" bindinput="phoneNumChange" bindfocus="getFocus"
+            bindblur="loseFocus" />
+        <view class="pretend-im-input">
+            <text class="input-text">{{vPhoneNum}}</text>
+            <text wx:if="{{vInputFocus}}" class="input-focus"></text>
+            <text wx:if="{{!vInputFocus}}" class="input-lose-focus"></text>
+            <text animation="{{vInputAnimationData}}" class="phone-input-placeholder" wx:if="{{vPhoneNum.length==0}}">请输入手机号码</text>
+        </view>
+        <view class="product-tips">{{vPhoneNum.length>7?vProductTips:""}}</view>
+    </view>
+
+    <view class="charge-empty"></view>
+    <view class="charge-card" wx:if="{{requestComplete}}">
+        <view style="margin-top: 100rpx; margin-bottom: 120rpx;" class="goods-empty" wx:if="{{chargeCardList.length==0}}">
+            <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+            <text>暂无商品</text>
+        </view>
+        <block wx:for="{{chargeCardList}}" wx:key="{{index}}">
+            <view class="charge-card-item" wx:if="{{item.goods_sale_price != 0 && item.click == 1 && isClick}}" bindtap="choosePrice" data-index="{{index}}">
+                <text class="charge-card-price">{{item.product_spec}}</text>
+                <text class="charge-card-sale-price">售价{{item.goods_sale_price}}元</text>
+            </view>
+            <view class="charge-card-item" wx:if="{{item.goods_sale_price != 0 && item.click == 1 && !isClick}}">
+                <text class="charge-card-price">{{item.product_spec}}</text>
+                <text class="charge-card-sale-price">售价{{item.goods_sale_price}}元</text>
+            </view>
+            <view class="charge-card-item" wx:if="{{item.goods_sale_price == 0}}">
+                <text class="charge-card-price" style="color:#c1c2c3;">{{item.product_spec}}</text>
+                <text class="charge-card-sale-price" style="color:#c1c2c3;">售价{{item.goods_sale_price}}元</text>
+            </view>
+            <view class="charge-card-item" wx:if="{{item.goods_sale_price != 0 && item.click == 2}}" style="border: 1px solid #ff3333;">
+                <text class="charge-card-price" style="color:#ff3333;">{{item.product_spec}}</text>
+                <text class="charge-card-sale-price" style="color:#ff3333;">售价{{item.goods_sale_price}}元</text>
+            </view>
+        </block>
+    </view>
+
+    <block wx:if="{{chargeCardList.length != 0}}">
+        <view class="charge-pay">
+            <text class="charge-pay-tip">支付金额：</text>
+            <text class="charge-pay-price">{{chooseData.goods_sale_price}}<text class="charge-pay-nuit" wx:if="{{chooseData.goods_sale_price}}">元</text></text>
+        </view>
+
+        <view class="information-line-line"></view>
+
+        <view class="charge-btn">
+            <view class="charge-btn-view" wx:if="{{chooseData.goods_sale_price}}" bindtap="gotoRecharge">立即充值</view>
+            <view class="charge-btn-view" style="background:#e1e1e1;" wx:if="{{!chooseData.goods_sale_price}}">立即充值</view>
+        </view>
+    </block>
+</view>
+<include src="/templates/dialog.wxml" />

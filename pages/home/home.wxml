@@ -1,0 +1,111 @@
+<view class="home-containers">
+    <scroll-view sroll-y>
+        <view class="home-banner">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_banner.png" wx:if="{{imgUrls.length == 1}}"></image>
+
+            <swiper indicator-dots="true" wx:if="{{imgUrls.length > 1}}"
+                autoplay="true" interval="3000" duration="500" circular="true" style="width: 750rpx; height: 302rpx;">
+                <block wx:for="{{imgUrls}}" wx:key="index">
+                    <swiper-item>
+                        <image src="{{item}}"></image>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+        <view class="home-top">
+            <view class="home-top-item" wx:for="{{dataList}}" wx:key="index" bindtap="gotoModel" data-index="{{item.value}}">
+                <image src="{{item.description.logo_url}}" mode="widthFix"></image>
+                <text>{{item.description.name}}</text>
+            </view>
+        </view>
+
+        <view class="card-empty"></view>
+
+        <view class="home-center" hidden>
+            <view class="home-center-tip">
+                <text>热门推荐</text>
+                <text bindtap="gotoMore">更多></text>
+            </view>
+            <block>
+                <view style="margin-top: 100rpx; margin-bottom: 120rpx;" class="goods-empty" wx:if="{{mGoodsList.length==0}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                    <text>暂无商品</text>
+                </view>
+                <view class="mall-goods-list">
+                    <view wx:if="{{mGoodsList.length>0}}" class="home-center-item" wx:for="{{mGoodsList}}" wx:key="index" bindtap="gotoDetail" data-product-id="{{item.product_id}}" data-type="{{item.product_type}}">
+                        <view class="home-center-let">
+                            <image src="{{item.cover_img}}" />
+                            <image wx:if="{{item.status == 8}}" style="left: 108rpx; top: 108rpx;" class="limitactivity-items-image-no" src="http://static.100bm.cn/mall/ui/default/ic_no_goods.png"></image>
+                        </view>
+                        <view class="home-center-right">                          
+                            <text class="home-center-name">{{item.product_name}}</text>
+                            <view>
+                                <text wx:if="{{item.status != 8}}" class="home-center-now-price">¥{{item.goods_sale_price}}</text>
+                                <text style="color: #888;" wx:if="{{item.status == 8}}" class="home-center-now-price">¥{{item.goods_sale_price}}</text>
+                                <text class="home-center-price" wx:if="{{item.goods_sale_price != item.face}}">¥{{item.face}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+
+        <view class="home-center">
+            <block>
+                <view style="margin-top: 100rpx; margin-bottom: 120rpx;" class="goods-empty" wx:if="{{mHomeGoodsList.length==0}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                    <text>暂无商品</text>
+                </view>
+                <view class="home-center-goods" wx:if="{{mHomeGoodsList.length > 0}}" wx:for="{{mHomeGoodsList}}" wx:key="{{index}}">
+                    <view class="home-center-tip">
+                        <view class="home_goods_title_item">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_flag.png"></image>
+                            <text style="color: #ff3333; font-weight: bold;">{{item.module_desc}}</text>
+                        </view>
+                        
+                        <text bindtap="gotoMore" data-type="{{item.category_id}}" >查看更多>></text>
+                    </view>
+                    <view class="mall-goods-images" wx:if="{{item.module_url}}">
+                        <image src="{{item.module_url}}"></image>
+                    </view>
+                    <view class="mall-goods-list">
+                        <view wx:if="{{item.module_type == 1}}" class="home-center-item" wx:for="{{item.productList}}" wx:key="productItem.product_id" wx:for-item="productItem" bindtap="gotoDetail" data-product-id="{{productItem.product_id}}" data-type="{{productItem.product_type}}">
+                            <view class="home-center-let">
+                                <image src="{{productItem.cover_img}}" />
+                                <image wx:if="{{productItem.status == 8}}" style="left: 108rpx; top: 108rpx;" class="limitactivity-items-image-no" src="http://static.100bm.cn/mall/ui/default/ic_no_goods.png"></image>
+                            </view>
+                            <view class="home-center-right">                          
+                                <text class="home-center-name">{{productItem.product_name}}</text>
+                                <view>
+                                    <text wx:if="{{productItem.status != 8}}" class="home-center-now-price">¥{{productItem.goods_sale_price}}</text>
+                                    <text style="color: #888;" wx:if="{{productItem.status == 8}}" class="home-center-now-price">¥{{productItem.goods_sale_price}}</text>
+                                    <text class="home-center-price" wx:if="{{productItem.goods_sale_price != productItem.face}}">¥{{productItem.face}}</text>
+                                </view>
+                            </view>
+                        </view>
+
+                        <view wx:if="{{item.module_type == 2}}" class="home-center-item-three" wx:for="{{item.productList}}" wx:key="productItem.product_id" wx:for-item="productItem" bindtap="gotoDetail" data-product-id="{{productItem.product_id}}" data-type="{{productItem.product_type}}">
+                            <view class="home-center-let-three">
+                                <image src="{{productItem.cover_img}}" />
+                                <image wx:if="{{productItem.status == 8}}" style="left: 108rpx; top: 108rpx;" class="limitactivity-items-image-no" src="http://static.100bm.cn/mall/ui/default/ic_no_goods.png"></image>
+                            </view>
+                            <view class="home-center-right">                          
+                                <text class="home-center-name">{{productItem.product_name}}</text>
+                                <view>
+                                    <text wx:if="{{productItem.status != 8}}" class="home-center-now-price">¥{{productItem.goods_sale_price}}</text>
+                                    <text style="color: #888;" wx:if="{{productItem.status == 8}}" class="home-center-now-price">¥{{productItem.goods_sale_price}}</text>
+                                    <text class="home-center-price" wx:if="{{productItem.goods_sale_price != productItem.face}}">¥{{productItem.face}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="mall-goods-banner-image" hidden>
+                        <image src="{{item.module_url}}"></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>
+<include src="/templates/dialog.wxml" />

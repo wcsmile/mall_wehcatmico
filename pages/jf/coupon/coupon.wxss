@@ -1,0 +1,22 @@
+.top_content{
+    height: 800rpx;
+    background-color: red;
+    align-items: center;
+}
+
+.btn{
+    width: 340rpx;
+    height:80rpx;
+    background-color: yellow;
+    display: inline-block;
+    text-align: center;
+    border-radius:6px; 
+}
+
+.btn text{
+    color: red;
+    font-size: 32rpx;
+    text-align: center;
+    font-weight: 600;
+    line-height: 80rpx;
+}

@@ -1,0 +1,48 @@
+<view class="receivingaddr-container">
+
+    <block>
+        <view class="myinvoice-empty" wx:if="{{invoiceList.length==0}}">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_no_invoice.png"></image>
+            <text>当前暂无发票抬头</text>
+        </view>
+
+        <view class="receivingaddr-content" wx:if="{{invoiceList.length > 0}}">
+            <view class="invoice-station-top" wx:for="{{invoiceList}}" wx:key="{{index}}" style="margin-top: 20rpx;" bindtap="chooseInvoiceTt" data-index="{{index}}">
+                <view class="invoice-station-items">
+                    <text>{{item.invoice_title}}</text>
+                    <text style="margin-top:6rpx; color: #b1b1b1;" wx:if="{{item.invoice_man_type == 2}}">税号:{{item.invoice_no}}</text>
+                    <text style="margin-top:6rpx; color: #b1b1b1;" wx:if="{{item.invoice_man_type == 1}}">个人抬头</text>
+                </view>
+
+                <view class="updateinvoice-line"></view>
+
+                <view class="receivingaddr-item-right" style="padding:0rpx;">
+                    <view class="receivingaddr-item-default" catchtap="setDefaultTt" data-index="{{index}}">
+                        <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{item.is_default != 0}}"></image>
+                        <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{item.is_default == 0}}"></image>
+                        <text wx:if="{{item.is_default != 0}}">设为默认</text>
+                        <text wx:if="{{item.is_default == 0}}" style="color:#333;">设为默认</text>
+                    </view>
+                    <view class="receivingaddr-item-oper">
+                        <view class="receivingaddr-item-oper-item" catchtap="gotoUpdateTt" data-index="{{index}}">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_address_update.png"></image>
+                            <text>编辑</text>
+                        </view>
+                        <view class="receivingaddr-item-oper-item" catchtap="delTt" data-index="{{index}}">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_address_delete.png"></image>
+                            <text>删除</text>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_edit.png" catchtap="editTt" style="width:31rpx; height:31rpx; margin-top:62rpx"></image> -->
+            </view>
+        </view>
+    </block>
+
+    <view class="receivingaddr-add">
+        <view bindtap="gotoAddInvoiceTt">新增抬头</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />
+<include src="/templates/guidemodal.wxml" />

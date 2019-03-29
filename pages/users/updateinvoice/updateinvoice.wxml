@@ -1,0 +1,95 @@
+<view class="updateinvoice-container">
+
+    <view class="card-empty"></view>
+
+    <view class="updateinvoice-title">
+        <text>抬头类型</text>
+        <view class="updateinvoice-invoice-choose" bindtap="changePersonalStatus">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_check.png" wx:if="{{!personalChecked}}" ></image>
+            <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_checked.png" wx:if="{{personalChecked}}"></image>
+            <text wx:if="{{!personalChecked}}">个人</text>
+            <text wx:if="{{personalChecked}}" style="color:#fb3938">个人</text>
+        </view>
+
+        <view class="updateinvoice-invoice-choose" style="margin-left: 70rpx;" bindtap="changeCompanyStatus">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_check.png" wx:if="{{!companyChecked}}" ></image>
+            <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_checked.png" wx:if="{{companyChecked}}"></image>
+            <text wx:if="{{!companyChecked}}">企业</text>
+            <text wx:if="{{companyChecked}}" style="color:#fb3938">企业</text>
+        </view>
+    </view>
+
+    <view class="card-empty"></view>
+
+    <view class="updateinvoice-input" wx:if="{{personalChecked}}">
+        <view class="updateinvoice-input-item">
+            <text>姓名或车牌号<text style="color:#fb3938; font-weight: 600;">*</text></text>
+            <input type="text" maxlength="10" bindinput="inputPersonalName" placeholder="请输入姓名或车牌号" placeholder-style="color:#999" value="{{personalName}}"/>
+        </view>
+
+        <view class="updateinvoice-line"></view>
+
+        <view class="updateinvoice-input-item">
+            <text>个人联系电话<text style="visibility:hidden;">*</text></text>
+            <input type="text" maxlength="11" bindinput="inputPersonalPhone" placeholder="请输入个人联系电话" placeholder-style="color:#999" value="{{personalPhone}}"/>
+        </view>
+    </view>
+
+    <view class="updateinvoice-input" wx:if="{{companyChecked}}">
+        <view class="updateinvoice-input-item">
+            <text>名称<text style="color:#fb3938; font-weight: 600;">*</text></text>
+            <input type="text" maxlength="30" bindinput="inputCompanyName" placeholder="请输入企业名称" placeholder-style="color:#999" style="margin-left:80rpx;" value="{{companyName}}"/>
+        </view>
+
+        <view class="updateinvoice-line"></view>
+
+        <view class="updateinvoice-input-item">
+            <text>税号<text style="color:#fb3938; font-weight: 600;">*</text></text>
+            <input type="text" maxlength="30" bindinput="inputCompanyCode" placeholder="请输入企业税号" placeholder-style="color:#999" style="margin-left:80rpx;" value="{{companyCode}}"/>
+        </view>
+
+        <view class="updateinvoice-line"></view>
+
+        <view class="updateinvoice-input-item">
+            <text>单位地址</text>
+            <input type="text" maxlength="30" bindinput="inputCompanyAddr" placeholder="请输入企业地址" placeholder-style="color:#999" value="{{companyAddr}}"/>
+        </view>
+
+        <view class="updateinvoice-line"></view>
+
+        <view class="updateinvoice-input-item">
+            <text>电话号码</text>
+            <input type="text" maxlength="15" bindinput="inputCompanyPhone" placeholder="请输入企业电话" placeholder-style="color:#999" value="{{companyPhone}}"/>
+        </view>
+
+        <view class="updateinvoice-line"></view>
+
+        <view class="updateinvoice-input-item">
+            <text>开户银行</text>
+            <input type="text" maxlength="20" bindinput="inputCompanyBankName" placeholder="请输入开户银行" placeholder-style="color:#999" value="{{companyBankName}}"/>
+        </view>
+
+        <view class="updateinvoice-line"></view>
+
+        <view class="updateinvoice-input-item">
+            <text>银行账号</text>
+            <input type="text" maxlength="30" bindinput="inputCompanyBankCode" placeholder="请输入银行账号" placeholder-style="color:#999" value="{{companyBankCode}}"/>
+        </view>
+    </view>
+
+    <view class="card-empty"></view>
+
+    <view class="updateinvoice-bottom">
+        <view  bindtap="gotoSetDefault">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_defaulted.png" wx:if="{{invoiceDefault}}"></image>
+            <text style="color: #333;" wx:if="{{invoiceDefault}}">设为默认</text>
+            <image src="http://static.100bm.cn/mall/ui/default/ic_invoice_default.png" wx:if="{{!invoiceDefault}}"></image>
+            <text wx:if="{{!invoiceDefault}}">设为默认</text>
+        </view>
+    </view>
+
+    <view class="updateinvoice-add">
+        <view bindtap="gotoSure">保存</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

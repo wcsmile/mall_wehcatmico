@@ -1,0 +1,47 @@
+<scroll-view scroll-y class="distribution-container">
+    <view class="distribution-container-image">
+        <image src="http://static.100bm.cn/mall/ui/default/cib/ic_banner.png"></image>
+    </view>
+    <view class="distribution-desc">
+        <view class="distribution-desc-text">
+            <view class="distribution-desc-top">
+                <text>首刷免年费，淘票票满20立减10元！</text>
+                <image src="http://static.100bm.cn/mall/ui/default/cib/ic_gift.png"></image>
+            </view>
+            <text>刷卡最高可享4500元豪礼！</text>
+            <text>多倍积分返现,绑定微信送积分2000！</text>
+            <text>积分赢取华为Mate 9！</text>
+            <text>200w航空意险！选择很多，优惠更多！最快5分钟核发！现在申请，更有80元手机话费免费领，数量有限，先到先得！</text>
+        </view>
+    </view>
+
+    <view class="distribution-input-item">
+        <view class="distribution-input-bg">
+            <view class="distribution-input-items">
+                <image src="http://static.100bm.cn/mall/ui/default/cib/ic_user.png"></image>
+                <input type="text" placeholder="请输入姓名" maxlength="6" bindinput="inputUserName"/>
+            </view>
+            <view class="distribution-input-items">
+                <image src="http://static.100bm.cn/mall/ui/default/cib/ic_phone.png"></image>
+                <input type="number" placeholder="请输入手机号码" maxlength="11" bindinput="inputPhone"/>
+            </view>
+            
+            <view class="distribution-btn" bindtap="gotoJoin">
+                <view>立即申请</view>
+            </view>
+        </view>
+    </view>
+    
+    <view class="distribution-tip">
+        <text style="margin-bottom: 28rpx; font-size: 30rpx; font-weight: 600;">特别提醒：</text>
+
+        <text>1.请在上方输入姓名及手机号，该信息需与申请信用卡的预留信息一致，方可获得礼品，如果填错，礼品将发放失败；</text>    
+            
+        <text>2.赠送礼品方案：信用卡首刷后，赠送80元手机话费；</text>
+
+        <text>3.所有礼品在信用首刷后15个工作日内发放，自动将话费充值到办卡用户的手机账户中；</text>
+
+        <text>4.如有疑问，请咨询客服 15184497701（周1至周5,9:00-18:00）</text>
+    </view>
+</scroll-view>
+<include src="/templates/dialog.wxml" />

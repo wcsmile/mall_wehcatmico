@@ -1,0 +1,17 @@
+<view class="buysuccess-containers">
+    <view class="buysuccess-top">
+        <view class="buysuccess-top-image">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_success.png"></image>
+        </view>
+        <text></text>
+        <text class="buysuccess-top-tip">{{rechargeTip}}</text>
+    </view>
+
+    <view class="buysuccess-middle">
+        <text>{{rechargeContent}}</text>  
+        <view class="buysuccess-middle-btn">
+            <button bindtap="gotoOrderList">查看订单</button>
+            <button  class="buysuccess-middle-back" bindtap="gotoHome">返回首页</button>
+        </view>
+    </view>
+</view>

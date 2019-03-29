@@ -1,0 +1,36 @@
+<include src="/templates/guidemodal.wxml" />
+<view class="exchange-parent">
+    <view class="exchange-image">
+        <text>中石化便利店商品</text>
+        <image src="http://static.100bm.cn/jifen/banner.png"></image>
+
+    </view>
+
+    <view class="exchange-center">
+        <view class="exchange-content">
+            <view class="exchange-input-phone">
+                <view>
+                    <input type="number" placeholder="请输入手机号码" maxlength="11" />
+                </view>
+                <text class="exchange-phone">请输入正确的手机号码</text>
+            </view>
+            <view class="exchange-get-code">
+                <input type="number" placeholder="请输入验证码" maxlength="6" />
+                <view class="code-line"></view>
+                <text>获取验证码</text>
+            </view>
+
+            <button class="exchange-search" bindtap="gotoGoodsList"></button>
+        </view>
+    </view>
+
+    <view class="exchange-bottom">
+        <text class="exchange-bottom-blod">温馨提示</text>
+        <text>1.仅支持四川移动积分查询与兑换</text>
+        <text>2.仅支持兑换四川省中石化加油站便利店商品</text>
+        <text>3.确认使用积分兑换商品后，领取提货券，将券信息出示给便利店收银员提货</text>
+        <text>4.确认兑换商品后，领取的提货券不退不换</text>
+        <text>5.通过积分兑换的商品，不提供发票</text>
+        <text>6.如有疑问，请拨打客服热线028-1234567</text>
+    </view>
+</view>

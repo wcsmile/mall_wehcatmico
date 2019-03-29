@@ -1,0 +1,5 @@
+{
+    "backgroundColor": "#fff",
+    "navigationBarTitleText": "最新油价",
+    "enablePullDownRefresh": false
+}

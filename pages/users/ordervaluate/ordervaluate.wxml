@@ -1,0 +1,31 @@
+<view class="ordervaluate-container">
+    <view class="ordervaluate-top" wx:for="{{orderDetailInfo.product_details}}" wx:key="{{index}}" wx:for-item="orderItem">
+        <view class="ordervaluate-top-msg">
+            <image class="ordervaluate-top-msg-image" src="{{orderItem.cover_img}}"></image>
+            <view class="ordervaluate-top-msg-right">
+                <text class="ordervaluate-top-msg-goods">{{orderItem.product_name}}</text>
+                <view class="ordervaluate-top-msg-right-valuate">
+                    <text>商品评分：</text>
+                    <view class="goodsevaluate-star">
+                        <block wx:for="{{orderItem.goods_level}}" wx:key="{{index}}">
+                            <image style="margin-left: 20rpx;" src="http://static.100bm.cn/mall/ui/default/ic_star_on.png" catchtap="addStar" id="{{index+1}}" data-in="add" data-ids="{{orderItem.order_detail_id}}"></image>
+                        </block>
+                        <block wx:if="{{orderItem.goods_level_no > 0}}" wx:for="{{orderItem.goods_level_no}}" wx:key="{{index}}"> 
+                            <image style="margin-left: 20rpx;" src="http://static.100bm.cn/mall/ui/default/ic_star.png" catchtap="addStar" id="{{index+1}}" data-in="minus" data-ids="{{orderItem.order_detail_id}}"></image>
+                        </block>
+                        <text style="font-size: 34rpx; color: #888; line-height: 40rpx; margin-left: 20rpx;">{{orderItem.average_star_level}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="ordervaluate-top-content">
+            <textarea maxlength="300" cursor-spacing="60" placeholder="请输入评价内容" adjust-position="true" placeholder-style="color:#999" bindinput="inputContent" data-index="{{index}}"/>
+        </view>
+    </view>
+
+    <view class="receivingaddr-add">
+        <view bindtap="gotoSubmitValuate">提交评价</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

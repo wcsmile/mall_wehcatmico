@@ -1,0 +1,3 @@
+<view>
+    <text bindtap="gotoCoupon">这是一个好天气</text>
+</view>

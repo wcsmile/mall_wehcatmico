@@ -1,0 +1,18 @@
+<view class="goodsmenu-container">
+    <view class="card-empty"></view>
+    <view class="goodsmenu-list" wx:for="{{menusList}}" wx:key="{{index}}">
+        <view class="goodsmenu-list-item">
+            <view class="goodsmenu-item-title">
+                <image src="{{item.menus_data.data.logo_url}}"></image>
+                <text>{{item.menus_data.data.class_name}}</text>
+            </view>
+            
+            <view class="goodsmenu-item-content">
+                <view class="goodsmenu-item-content-item" wx:for="{{item.menus_datas}}" wx:key="{{menuItem.class_id}}"  wx:for-item="menuItem" bindtap="chooseGoods" data-id="{{menuItem.class_id}}" data-name="{{menuItem.class_name}}">
+                    <text>{{menuItem.class_name}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

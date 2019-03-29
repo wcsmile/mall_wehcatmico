@@ -1,0 +1,25 @@
+<view class="invoice-station-container">
+    <view class="charge-empty"></view>
+    <view class="invoice-station-top" bindtap="chooseTt">
+        <view class="invoice-station-no">
+            <text wx:if="{{!invoiceName}}">请选择发票抬头！</text>
+        </view>
+        <view class="invoice-station-items" wx:if="{{invoiceName}}">
+            <text>{{invoiceName}}</text>
+            <text style="margin-top:6rpx; color: #b1b1b1;" wx:if="{{invoiceType == 2}}">税号:{{invoiceCode}}</text>
+            <text style="margin-top:6rpx; color: #b1b1b1;" wx:if="{{invoiceType != 2}}">个人抬头</text>
+        </view>
+        <image src="http://static.100bm.cn/mall/ui/default/ic_right_icon.png"></image>
+    </view>
+
+    <view class="charge-empty"></view>
+
+    <view class="invoice-station-bottom">
+        <text>请向便利店收银员展示以开具纸质发票</text>
+
+        <view style="padding: 0 40rpx 0 2rpx;">  
+            <canvas canvas-id="couponNoCanvas"/>
+        </view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

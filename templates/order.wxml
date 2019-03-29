@@ -1,0 +1,27 @@
+<view wx:if="{{_modal_.showVoucherModal}}" catchtap="hideOrder" style="position:absolute; opacity:0.4; background-color:#000; left:0; top:0; width:100%; height:100%; position: fixed"></view>
+<view animation="{{_modal.vVoucherAnimationData}}" class="order-dialog" wx:if="{{_modal_.showVoucherModal}}">
+    <view class="order-dialog-top">
+        <image src="{{productInfo.cover_img}}"></image>
+        <view class="order-dialog-top-desc">
+            <text>{{productInfo.product_name}}</text>
+            <text class="order-dialog-top-price">¥{{productInfo.sale_price}}</text>
+        </view>
+        <image class="order-dialog-top-close" src="http://static.100bm.cn/mall/ui/default/ic_close.png" bindtap="closeDialog"></image>
+    </view>
+    <view class="order-dialog-middle">
+        <text>购买数量：</text>
+        <view class="order-dialog-middle-num">
+            <view class="order-dialog-middle-minus" bindtap="minusNum"><text>-</text></view>
+            <text>{{orderNum}}</text>
+            <view class="order-dialog-middle-add" bindtap="addNum"><text>+</text></view>
+        </view>
+    </view>
+    <view class="order-dialog-bottom">
+        <text>配货方式：到店自提</text>
+        <text class="order-dialog-bottom-desc">购买后将获得提货券，凭券在加油站便利店内，将券信息出示给收银员即可提货。</text>
+    </view>
+    <view class="order-dialog-btn">
+        <view class="order-dialog-btn-price">¥{{orderPrice}}</view>
+        <view class="order-dialog-btn-buy" bindtap="showDialog">提交订单</view>
+    </view>
+</view>

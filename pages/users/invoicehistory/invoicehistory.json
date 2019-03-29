@@ -1,0 +1,5 @@
+{
+    "backgroundColor": "#fff",
+    "navigationBarTitleText": "开票历史",
+    "enablePullDownRefresh": true
+}

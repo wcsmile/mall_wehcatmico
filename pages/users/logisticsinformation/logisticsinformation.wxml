@@ -1,0 +1,41 @@
+<view class="logistics-containers">
+    <scroll-view scroll-y>
+        <block wx:for="{{logisticsList}}" wx:key="{{logisticsItem.express_no}}" wx:for-item="logisticsItem">
+            <view class="card-empty"></view>
+            <view class="logistics-top" bindtap="showDetail" data-index="{{index}}">
+                <image src="http://static.100bm.cn/mall/ui/default/ic_logistics.png" mode="widthFix"></image>
+                <view class="logistics-info">
+                    <text style="font-size: 36rpx; color: #ff8400">{{logisticsItem.logistics_status}}</text>
+                    <text>物流公司：<text style="color: #333">{{logisticsItem.express_name}}</text></text>
+                    <text>运单号码：<text style="color: #333">{{logisticsItem.express_no}}</text></text>
+                </view>
+                <a wx:if="{{!logisticsItem.isShowDetail}}" class="a-icon-down" style="margin-top: 44rpx;">
+                    <i class="iconfont icon-icarrow color-i color-gray"></i>
+                </a>
+                <a wx:if="{{logisticsItem.isShowDetail}}" class="a-icon-down" style="margin-top: 44rpx;">
+                    <i class="iconfont icon-uparrow color-i color-gray"></i>
+                </a>
+            </view>
+            <view style="padding: 0 20rpx; box-sizing: border-box;" wx:if="{{logisticsItem.isShowDetail}}">
+                <view class="information-line"></view>
+            </view>
+
+            <view class="logistics-content" wx:if="{{logisticsItem.isShowDetail}}">
+                <text style="height: 100rpx; line-height: 100rpx;">物流跟踪</text>
+                <view class="logistics-item" wx:for="{{logisticsItem.logistics_info}}" wx:key="{{item.time}}">
+                    <view class="logistics-item-left">
+                        <view class="logistics-item-left-point"></view>
+                        <view class="logistics-item-left-line"></view>
+                    </view>
+                    <view class="logistics-item-content">
+                        <text>{{item.context}}</text>
+                        <text style="color: #ff3333;" wx:if="{{item.phone}}" data-phone="{{item.phone}}" bindtap="gotoCall">去联系</text>
+                        
+                        <text style="margin-top: 6rpx;">{{item.time}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+</view>
+<include src="/templates/dialog.wxml" />

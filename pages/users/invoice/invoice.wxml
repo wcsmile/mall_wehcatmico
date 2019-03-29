@@ -1,0 +1,34 @@
+<view class="invoice-container">
+
+    <view class="invoice-item" bindtap="shopInvoice">
+        <image src="http://static.100bm.cn/mall/ui/default/ic_wscfp.png"></image>
+        <view class="invoice-item-content">
+            <text>微商城购物开票</text>
+            <text style="font-size: 26rpx; color: #b1b1b1; font-weight: 0; margin-top: 10rpx;">微商城购物,开具纸质发票</text>
+        </view>
+    </view>
+
+    <view class="invoice-item" bindtap="stationInvoice">
+        <image src="http://static.100bm.cn/mall/ui/default/ic_station_fp.png"></image>
+        <view class="invoice-item-content">
+            <text>加油消费开票</text>
+            <text style="font-size: 26rpx; color: #b1b1b1; font-weight: 0; margin-top: 10rpx;">加油站内加油消费,开具纸质发票</text>
+        </view>
+    </view>
+
+    <view class="invoice-item" bindtap="invoiceHistory">
+        <image src="http://static.100bm.cn/mall/ui/default/ic_fpjl.png"></image>
+        <view class="invoice-item-content">
+            <text>开票记录</text>
+            <text style="font-size: 26rpx; color: #b1b1b1; font-weight: 0; margin-top: 10rpx;">微商城购物开票历史</text>
+        </view>
+    </view>
+
+    <view class="invoice-item" bindtap="invoiceInfo">
+        <image src="http://static.100bm.cn/mall/ui/default/ic_fptt.png"></image>
+        <view class="invoice-item-content">
+            <text>发票抬头</text>
+            <text style="font-size: 26rpx; color: #b1b1b1; font-weight: 0; margin-top: 10rpx;">企业与个人抬头信息管理</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,38 @@
+<view class="address-containers">
+    <view class="card-empty"></view>
+    <view class="address-content">
+        <view class="card-message">
+            *请与身份证信息保持一致
+        </view>
+        <view class="address-item">
+            <text>姓名</text>
+            <input type="text" maxlength="6" bindinput="inputNmae" value="{{name}}"/>
+        </view>
+        <view class="address-item">
+            <text>身份证号</text>
+            <input type="idcard" maxlength="18" bindinput="inputIDCard" value="{{IDCards}}"/>
+        </view>
+        <view class="address-item">
+            <text>所在地区</text>
+            <picker mode="region" bindchange="bindRegionChange" value="{{province}}{{city}}{{area}}">
+                <view class="picker-region" wx:if="{{province}}">
+                    <text class="picker-region-text">{{province}}{{city}}{{area}}</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+                <view class="picker-tip" wx:if="{{!province}}">
+                    <text class="picker-tip-text">请选择</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+            </picker>
+        </view>
+        <view class="address-item" style="border: none;">
+            <text style="height: 160rpx; line-height: 160rpx;">详细地址</text>
+            <textarea class="address-item-textarea" type="text" maxlength="64" bindinput="inputAddress" value="{{address}}"></textarea>
+        </view>
+    </view>
+
+    <view class="card-btn" bindtap="gotoInformation">
+        <view>确认</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

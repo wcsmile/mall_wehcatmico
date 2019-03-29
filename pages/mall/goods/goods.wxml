@@ -1,0 +1,89 @@
+<include src="/templates/guidemodal.wxml" />
+<include src="/templates/dialog.wxml" />
+<view class="goods-container">
+    <scroll-view sroll-y>
+        <view class="goods-oper-item">
+            <view class="goods-choose-tab" wx:if="{{clickTab == 0}}">
+                <view class="goods-choose-item">
+                    <a class="active">综合</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="2" bindtap="switchTab">价格升序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="1" bindtap="switchTab">价格降序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="3" bindtap="switchTab">销量</a>
+                </view>
+            </view>  
+            <view class="goods-choose-tab" wx:if="{{clickTab == 2}}">
+                <view class="goods-choose-item">
+                    <a data-type="0" bindtap="switchTab">综合</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a class="active">价格升序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="1" bindtap="switchTab">价格降序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="3" bindtap="switchTab">销量</a>
+                </view>
+            </view>   
+            <view class="goods-choose-tab" wx:if="{{clickTab == 1}}">
+                <view class="goods-choose-item">
+                    <a data-type="0" bindtap="switchTab">综合</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="2" bindtap="switchTab">价格升序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a class="active">价格降序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="3" bindtap="switchTab">销量</a>
+                </view>
+            </view>
+            <view class="goods-choose-tab" wx:if="{{clickTab == 3}}">
+                <view class="goods-choose-item">
+                    <a data-type="0" bindtap="switchTab">综合</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="2" bindtap="switchTab">价格升序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a data-type="1" bindtap="switchTab">价格降序</a>
+                </view>
+                <view class="goods-choose-item">
+                    <a class="active">销量</a>
+                </view>
+            </view>   
+        </view>
+
+        <view class="mall-goods-list" style="margin-top: 6rpx;">
+            <block wx:if="{{requestComplete}}">
+                <view class="goods-empty" wx:if="{{mGoodsList.length==0}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                    <text>暂无商品</text>
+                </view>
+                <view wx:if="{{mGoodsList.length>0}}" class="mall-goods-items" wx:for="{{mGoodsList}}" wx:key="goods_no" bindtap="gotoDetail" data-id="{{item.product_id}}" data-type="{{item.product_type}}">
+                    <view wx:if="{{item.goods_ischange}}" class="mall-goods-item">
+                        <view class="mall-goods-top">
+                            <image src="{{item.goods_image}}" />
+                            <image wx:if="{{item.status == 8}}" style="left: 108rpx; top: 108rpx;" class="limitactivity-items-image-no" src="http://static.100bm.cn/mall/ui/default/ic_no_goods.png"></image>
+                        </view>
+                        <view class="mall-goods-bottom">                          
+                            <text class="mall-goods-name">{{item.goods_name}}</text>
+                            <view>
+                                <text class="mall-goods-new-price">{{item.goods_price}}</text>
+                                <text style="color: #888;" wx:if="{{item.status == 8}}" class="home-center-now-price">¥{{item.goods_price}}</text>
+                                <text class="mall-goods-price" wx:if="{{item.goods_price != item.goods_face}}">{{item.goods_face}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

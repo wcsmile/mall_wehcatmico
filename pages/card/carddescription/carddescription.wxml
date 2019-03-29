@@ -1,0 +1,29 @@
+<view class="card-containers">
+    <view class="card-empty"></view>
+    <view class="card-center">
+        <view class="card-item" wx:for="{{descList}}" wx:key="{{index}}">
+            <text>{{index + 1}}、</text>
+            <text>{{item.description}}</text>
+        </view>
+    </view>
+
+    <block wx:if="{{descList.length > 0}}">
+        <view class="card-line"></view>
+
+        <view class="card-agreenment">
+            <view>
+                <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!isChecked}}" bindtap="changeStatus" data-type="1"></image>
+                <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{isChecked}}" bindtap="changeStatus" data-type="2"></image>
+                <text>已阅读并同意</text>
+                <text class="card-agreenment-view" bindtap="gotoAgreenment">《中国石化加油卡办卡协议》</text>
+            </view>
+        </view>
+
+        <text wx:if="{{!isRechargeOil}}" class="charge-desc">{{rechargeMsg}}</text>
+
+        <view class="card-btn">
+            <view wx:if="{{isChecked && isRechargeOil}}" bindtap="gotoNext">下一步，填写资料</view>
+            <view style="background:#e1e1e1;" wx:if="{{!isChecked || !isRechargeOil}}">下一步，填写资料</view>
+        </view>
+    </block>
+</view>

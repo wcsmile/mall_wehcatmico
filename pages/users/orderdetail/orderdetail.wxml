@@ -1,0 +1,157 @@
+<view class="orderdetail-container">
+    <block wx:if="{{requestComplate}}">
+        <view class="orderdetail-top-status">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_order_icon.png"></image>
+            <text>{{orderDetailInfo.payStatus}}</text>
+        </view>
+        <view class="orderdetail-top">
+            <view class="orderdetail-top-order">
+                <text>订单编号：{{orderDetailInfo.order_no}}</text>
+                <text class="orderdetail-top-right"></text>
+            </view>
+            <view class="orderdetail-top-time">
+                <text>订单类型：{{orderDetailInfo.productType}}</text>
+            </view>
+            <view class="orderdetail-top-time">
+                <text>下单时间：{{orderDetailInfo.create_time}}</text>
+            </view>
+            <view class="orderdetail-top-time" wx:if="{{orderDetailInfo.pay_finish_time}}">
+                <text>付款时间：{{orderDetailInfo.pay_finish_time}}</text>
+            </view>
+            <view class="orderdetail-top-time" wx:if="{{orderDetailInfo.order_finish_time}}">
+                <text>关闭时间：{{orderDetailInfo.order_finish_time}}</text>
+            </view>
+            <view class="orderdetail-top-time" wx:if="{{orderDetailInfo.orderFinishTime && orderDetailInfo.orderStatus == 80}}">
+                <text>退款时间：{{orderDetailInfo.orderFinishTime}}</text>
+            </view>
+            <view class="orderdetail-top-pay">
+                <text>支付方式：{{orderDetailInfo.payType}}</text>
+                <text class="orderdetail-top-right" hidden>¥{{orderDetailInfo.pay_amounts}}</text>
+            </view>
+        </view>
+        <view class="orderdetail-empty"></view>
+        <view class="orderdetail-middle">
+            <image src="{{mallIcon}}"></image>
+            <text>商家：{{businessName}}</text>
+        </view>
+
+        <view class="orderdetail-empty"></view>
+
+        <view class="orderdetail-bottom-container" bindtap="gotoOrderDetail" data-activitys="{{item.activity_tag}}" data-index="{{item.product_id}}" data-status="{{item.product_status}}" data-type="{{item.product_type}}" wx:for="{{orderDetailInfo.product_details}}" wx:key="{{index}}">
+            <view class="orderdetail-bottom">
+                <view class="orderdetail-bottom-image">
+                    <image src="{{item.cover_img}}"></image>
+                    <text wx:if="{{item.product_status != 0}}">{{item.productStatus}}</text>
+                </view>
+                <view class="orderdetail-bottom-desc">
+                    <text>{{item.product_name}}</text>
+                    <view style="margin-top: 10rpx;">
+                        <text class="order-item-middle-price">¥{{item.sale_prices}}</text>
+                        <text class="order-item-middle-face-price">¥{{item.faces}}</text>
+                    </view>
+                </view>
+                <view class="orderdetail-bottom-num">
+                    <text>×{{item.product_count}}</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+            </view>
+            <view class="orderdetail-line"></view>
+        </view>
+        
+
+        <block>
+            <view class="detail-userinfo-oilinfo">
+                <text>商品总价：<text style="color: #ff3333;">¥{{payMoney}}</text></text>
+                <text>运费：<text style="color: #ff3333;">¥{{postage}}</text></text>
+                <view>
+                    <text>实付金额：<text style="color: #ff3333;">¥{{payTotalMoney}}</text></text>
+                    <text wx:if="{{productType == 1}}" style="color: #999; margin-left: 20rpx;">(自提商品不能退款)</text>
+                </view>
+            </view>
+        </block>
+
+        <block wx:if="{{productType == 1 || productType == 10 || productType == 11}}">
+            <view class="detail-tip">
+                <text>其他信息</text>
+            </view>
+            <view class="detail-userinfo-oilinfo">
+                <view style="margin-bottom: 10rpx;" wx:if="{{productType == 10 || productType == 11}}">
+                    <text>发票金额：¥{{payTotalMoney}}</text>
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_submit_question.png" bindtap="showDialog"></image>
+                </view>
+                <text wx:if="{{productType == 1}}" bindtap="gotoCoupon">提货券：<text style="color: #ff3333;">查看券包</text></text>
+            </view>
+        </block>
+
+        <block wx:if="{{productType == 2 || productType == 3 || productType == 5 || productType == 6 || productType == 7 || productType == 8}}">
+            <view class="detail-tip">
+                <text>基础信息</text>
+            </view>
+            <view class="detail-userinfo-oilinfo" wx:for="{{orderDetailInfo.product_details}}" wx:key="{{index}}" wx:if="{{productType == 6}}">
+                <text>加油卡号：{{item.account}}</text>
+            </view>
+            <view class="detail-userinfo-oilinfo" wx:for="{{orderDetailInfo.product_details}}" wx:key="{{index}}" wx:if="{{productType != 6}}">
+                <text>充值账号：{{item.account}}</text>
+            </view>
+        </block>
+
+        <block wx:if="{{productType == 4 && orderDetailInfo.orderStatus == 13}}">
+            <view class="orderdetail-empty"></view>
+            <view class="detail-explain" wx:for="{{orderDetailInfo.product_details}}" wx:key="{{index}}">
+                <text class="detail-userinfo-explain">原因：{{item.audit_msg}}</text>
+                <text class="detail-userinfo-update" bindtap="gotoUpdate">修改资料</text>
+            </view>
+        </block>
+
+        <block wx:if="{{productType == 4 || productType == 10 || productType == 11}}">
+            <view class="detail-tip">
+                <text>收货信息</text>
+            </view>
+
+            <view class="detail-userinfo" wx:for="{{orderDetailInfo.carriage_info}}" wx:key="{{index}}" bindtap="gotoLogistic" data-status="{{item.logistics_status}}">
+                <view class="detail-userinfo-text">
+                    <view class="detail-userinfo-idcard-user">
+                        <text>{{item.recipient_name}}</text>
+                        <text style="margin-left: 50rpx;">{{item.recipient_phone}}</text>
+                    </view>
+                    <text>{{item.province_no}}{{item.city_no}}{{item.area_street}}{{item.recipient_address}}</text>
+                </view>
+                <view class="detail-userinfo-status">
+                    <text style="color: #ff3333;  width: 94rpx;" wx:if="{{item.logistics_status}}">{{item.logistics_status}}</text>
+                    <text style="color: #fff; width: 94rpx;" wx:if="{{!item.logistics_status}}">派送中</text>
+                    <i class="iconfont icon-right-arrow"></i>
+                </view>
+            </view>
+        </block>
+
+        <block wx:if="{{orderDetailInfo.product_details[0].status != 50 || orderDetailInfo.product_details[0].status != 90 || orderDetailInfo.product_details[0].status != 99}}">
+            <view class="detail-userinfo-oper">
+                <text wx:if="{{(orderDetailInfo.product_details[0].status == 0 || orderDetailInfo.product_details[0].status == 20 || orderDetailInfo.product_details[0].status == 21) && (productType == 4 || productType == 10 || productType == 11)}}" class="order-item-bottom-btn" bindtap="gotoLogistics">查看物流</text>
+                <text wx:if="{{(orderDetailInfo.product_details[0].status == 10 || orderDetailInfo.product_details[0].status == 12) && (productType == 10) && (orderDetailInfo.pay_amount != 0)}}" class="order-item-bottom-btn" bindtap="gotoBackMoney">申请退款</text>
+                <text wx:if="{{orderDetailInfo.product_details[0].status == 20}}" class="order-item-bottom-btn" bindtap="gotoSure">确认收货</text>
+                <text wx:if="{{orderDetailInfo.product_details[0].status == 21}}" class="order-item-bottom-btn" bindtap="gotoEvaluate">去评价</text>
+                <text wx:if="{{orderDetailInfo.product_details[0].status == 11}}" class="order-item-bottom-btn" bindtap="gotoPay">继续付款</text>
+                <text wx:if="{{orderDetailInfo.product_details[0].status == 80}}" class="order-item-bottom-btn-tip">已退款：¥{{refundAmount}}</text>
+                <text wx:if="{{orderDetailInfo.product_details[0].status == 81 || orderDetailInfo.product_details[0].status == 89}}" class="order-item-bottom-btn-tip">退款申请未通过（或退款审核中）</text>
+                <text wx:if="{{orderDetailInfo.product_details[0].status == 12 && productType == 4}}" class="order-item-bottom-btn-tip">开卡审核中</text>
+            </view>
+        </block>
+
+        <block wx:if="{{productType == 4}}">
+            <view class="detail-tip">
+                <text>基础信息</text>
+            </view>
+
+            <view class="detail-userinfo-oilinfo" wx:for="{{orderDetailInfo.product_details}}" wx:key="{{index}}">
+                <text>姓名：{{item.customer_name}}</text>
+                <text>身份证号码：{{item.id_card_no}}</text>
+                <text>身份证地址：{{item.province_no}}{{item.city_no}}{{item.area_street}}{{item.address}}</text>
+                <text>加油卡号：{{item.account}}</text>
+                <text>手机号码：{{item.customer_phone}}</text>
+                <text hidden>预设密码：{{item.init_pwds}}</text>
+                <text hidden>手续费：{{item.hand_fee}}</text>
+            </view>
+        </block>
+    </block>
+</view>
+<include src="/templates/guidemodal.wxml" />

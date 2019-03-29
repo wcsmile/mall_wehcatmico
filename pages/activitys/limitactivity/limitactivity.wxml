@@ -1,0 +1,77 @@
+<include src="/templates/dialog.wxml" />
+<view class="limitactivity-container">
+    <view class="order-top">
+        <view class="order-choose-tab" wx:if="{{clickTab == 0}}">
+            <view class="order-choose-item">
+                <a class="active">进行中</a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="1" bindtap="switchTab">即将开始<text wx:if="{{startGoodsNum>0}}">{{startGoodsNum}}</text></a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="2" bindtap="switchTab">已结束</a>
+            </view>
+        </view>  
+        <view class="order-choose-tab" wx:if="{{clickTab == 1}}">
+            <view class="order-choose-item">
+                <a data-type="0" bindtap="switchTab">进行中</a>
+            </view>
+            <view class="order-choose-item">
+                <a class="active">即将开始<text wx:if="{{startGoodsNum>0}}">{{startGoodsNum}}</text></a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="2" bindtap="switchTab">已结束</a>
+            </view>
+        </view>  
+        <view class="order-choose-tab" wx:if="{{clickTab == 2}}">
+            <view class="order-choose-item">
+                <a data-type="0" bindtap="switchTab">进行中</a>
+            </view>
+            <view class="order-choose-item">
+                <a data-type="1" bindtap="switchTab">即将开始<text wx:if="{{startGoodsNum>0}}">{{startGoodsNum}}</text></a>
+            </view>
+            <view class="order-choose-item">
+                <a class="active">已结束</a>
+            </view>
+        </view>
+    </view>
+
+    <view class="limitactivity-containers">
+        <block wx:if="{{requestComplete}}">
+            <view class="goods-empty" wx:if="{{mGoodsList.length==0}}">
+                <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                <text>暂无活动商品</text>
+            </view>
+            <view wx:if="{{mGoodsList.length>0}}" class="limitactivity-items" wx:for="{{mGoodsList}}" wx:key="{{index}}" bindtap="gotoOrderDetail" data-tag="{{item.tag}}" data-index="{{item.product_id}}" data-type="{{item.product_type}}">
+                <view class="limitactivity-items-image">
+                    <image class="limitactivity-items-image-goods" src="{{item.cover_img}}"></image>
+                    <image hidden class="limitactivity-items-image-no" src="http://static.100bm.cn/mall/ui/default/ic_goods_no.png"></image>
+                </view>
+                <view class="limitactivity-items-right" wx:if="{{item.status != 2}}">
+                    <view class="limitactivity-items-right-name">
+                        <text class="limitactivity-items-right-goodsname">{{item.product_name}}</text>
+                        <text class="limitactivity-items-right-name-date" wx:if="{{item.status == 1}}">开始时间：<text class="limitactivity-items-right-name-time">{{item.expire_start}}</text></text>
+                        <text class="limitactivity-items-right-name-date" wx:if="{{item.status != 1}}">结束时间：<text class="limitactivity-items-right-name-time">{{item.expire_time}}</text></text>
+                    </view>
+
+                    <view>
+                        <text class="limitactivity-items-right-price-now">¥{{item.discount_prices}}</text>
+                        <text class="limitactivity-items-right-price-old">¥{{item.sale_prices}}</text>
+                    </view>
+                </view>
+
+                <view class="limitactivity-items-right" wx:if="{{item.status == 2}}">
+                    <view class="limitactivity-items-right-name">
+                        <text class="limitactivity-items-right-goodsname">{{item.product_name}}</text>
+                        <text class="limitactivity-items-right-name-date" style="color: #b2b2b2">结束时间：<text class="limitactivity-items-right-name-time" style="background: #d4d4d4;">{{item.expire_time}}</text></text>
+                    </view>
+
+                    <view class="limitactivity-items-right-price">
+                        <text class="limitactivity-items-right-price-now" style="color: #999;">¥{{item.discount_prices}}</text>
+                        <text class="limitactivity-items-right-price-old">¥{{item.sale_prices}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,45 @@
+<view class="receivingaddr-container">
+
+    <block>
+        <view class="goods-empty" wx:if="{{addressList.length==0}}">
+            <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+            <text>暂无收货地址</text>
+        </view>
+
+        <view class="receivingaddr-content" wx:if="{{addressList.length > 0}}">
+            <view class="receivingaddr-item" wx:for="{{addressList}}" wx:key="{{index}}" bindtap="chooseAddress" data-index="{{index}}">
+                <view class="receivingaddr-address">
+                    <view class="receivingaddr-name-phone">
+                        <text>{{item.recipient}}</text>
+                        <text style="margin-left: 20rpx;">{{item.contact_no}}</text>
+                    </view>
+                    <text>{{item.province}}{{item.city}}{{item.area_street}}{{item.town}}{{item.address}}</text>
+                </view>
+
+                <view class="receivingaddr-item-right">
+                    <view class="receivingaddr-item-default" catchtap="setDefaultAddress" data-index="{{index}}">
+                        <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{item.is_default != 0}}"></image>
+                        <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{item.is_default == 0}}"></image>
+                        <text>设为默认</text>
+                    </view>
+                    <view class="receivingaddr-item-oper">
+                        <view class="receivingaddr-item-oper-item" catchtap="gotoUpdateAddr" data-index="{{index}}">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_address_update.png"></image>
+                            <text>编辑</text>
+                        </view>
+                        <view class="receivingaddr-item-oper-item" catchtap="delAddress" data-index="{{index}}">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_address_delete.png"></image>
+                            <text>删除</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <view class="receivingaddr-add">
+        <view bindtap="gotoAddAddr">新增收货地址</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />
+<include src="/templates/guidemodal.wxml" />

@@ -1,0 +1,99 @@
+<view class="submitorder-container">
+    <view class="submitorder-top">
+        <view class="submitorder-top-addr" wx:if="{{types == 0}}">
+            <view class="charge-empty"></view>
+            <view class="submitorder-address" bindtap="chooseAddress">
+                <view class="submitorder-addr-no">
+                    <text wx:if="{{!receivingName}}">请填写收货信息！</text>
+                </view>
+                <view class="submitorder-address-items" wx:if="{{receivingName}}">
+                    <text>收货人：{{receivingName}}<text style="margin-left: 40rpx;">{{reveivingPhone}}</text></text>
+                    <text>收货地址：{{receivingProvinceName}}{{receivingCityName}}{{receivingAreaName}}{{receivingTownName}}{{receivingAddress}}</text>
+                </view>
+                <i class="iconfont icon-right-arrow"></i>
+            </view>
+        </view>
+        <view class="submitorder-addr-image" wx:if="{{types == 0}}"></view>
+
+        <view class="submitorder-center" wx:if="{{requestComplete}}">
+            <view class="charge-empty"></view>
+            <view class="submitorder-center-item">
+                <block wx:for="{{submitList}}" wx:key="{{cardItem.shop_id}}" wx:for-item="cardItem">
+                    <view class="submitorder-center-business">
+                        <image src="{{cardItem.shop_logo}}"></image>
+                        <text>{{cardItem.shop_name}}</text>
+                    </view>
+                    <view class="submitorder-center-goods" wx:for="{{cardItem.data}}" wx:key="{{index}}" wx:for-item="item">
+                        <image src="{{item.cover_img}}"></image>
+                        <view class="submitorder-center-goods-items">
+                            <text>{{item.product_name}}</text>
+                            <view class="submitorder-center-goods-price">
+                                <text>¥{{item.sale_prices}}</text>
+                                <text wx:if="{{buy == 1002}}">×{{item.product_count}}</text>
+                                <view wx:if="{{buy == 1001}}" class="submitorder-dialog-middle-num">
+                                    <view class="order-dialog-middle-minus" bindtap="minusNum" data-id="{{item.product_id}}" data-index="{{index}}"><text>-</text></view>
+                                    <text>{{item.product_count}}</text>
+                                    <view class="order-dialog-middle-add" bindtap="addNum" data-id="{{item.product_id}}" data-index="{{index}}"><text>+</text></view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="submitorder-center-goods-item">
+                        <text>配送方式</text>
+                        <text wx:if="{{(cardItem.product_flag & 16) == 16}}">商家配送</text>
+                        <text wx:if="{{(cardItem.product_flag & 32) == 32}}">自提</text>
+                    </view>
+                    <view class="submitorder-center-goods-item" wx:if="{{cardItem.activity_list.length > 0}}">
+                        <text>促销活动</text>
+                        <view class="submitorder-goods-activity">
+                            <block wx:for="{{cardItem.activity_list}}" wx:key="{{index}}">
+                                <view class="submitorder-goods-activity-text">{{item.activity_name}}</view>
+                            </block>
+                        </view>
+                    </view>
+                    <view class="submitorder-center-goods-item" wx:if="{{cardItem.giverule_info}}">
+                        <text>送积分</text>
+                        <text>{{cardItem.giverule_info.activity_name}}</text>
+                    </view>
+                    <view class="submitorder-center-goods-item">
+                        <text>客户留言</text>
+                        <input type="text" maxlength="80" cursor-spacing="60" placeholder="请填写客户留言" adjust-position="true" placeholder-style="color:#c3c3c3" bindinput="inputMessage" data-id="{{cardItem.shop_id}}"/>
+                    </view>
+                    <view class="charge-empty"></view>
+                </block>
+
+                <view class="submitorder-center-bottom">
+                    <view class="submitorder-center-goods-item">
+                        <text>商品金额</text>
+                        <text style="color: #ff3333;">¥{{orderMoney}}</text>
+                    </view>
+                    <view class="submitorder-center-goods-item">
+                        <text>运费</text>
+                        <text style="color: #ff3333;">¥{{postageMoney}}</text>
+                    </view>
+                    <view class="submitorder-center-goods-item">
+                        <text>订单总额</text>
+                        <text style="color: #ff3333;">¥{{totalOrderMoney}}</text>
+                    </view>
+                    <view class="submitorder-center-goods-item">
+                        <view class="submitorder-invoice">
+                            <text>发票金额</text>
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_submit_question.png" bindtap="showDialog"></image>
+                        </view>
+                        <text style="color: #888;">¥{{totalOrderMoney}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="submitorder-bottom" wx:if="{{requestComplete}}">
+        <view class="submitorder-bottom-left">
+            <text>共计{{totalNum}}件<text style="margin-left: 30rpx; font-size: 28rpx; color: #333;">合计：<text style="color: #ff3333; font-size: 36rpx; font-weight: 600;">¥{{totalPrice}}</text></text></text>
+        </view>
+        <view class="submitorder-bottom-right" wx:if="{{requestPstage}}" bindtap="gotoSubmitOrder">提交订单</view>
+        <view class="submitorder-bottom-right" style="background: #e1e1e1;" wx:if="{{!requestPstage}}">提交订单</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />
+<include src="/templates/guidemodal.wxml" />

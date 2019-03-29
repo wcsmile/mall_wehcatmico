@@ -1,0 +1,179 @@
+<view wx:if="{{_modal_.showModal}}" class="win-bz">
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-1" wx:if="{{type==1}}">
+        <view class="dialog-1-image">
+            <image src="http://static.100bm.cn/jifen/pop-ico.png"></image>
+        </view>
+
+        <view class="dialog-1-content">
+            <text class="dialog-1-black">请确认使用</text>
+            <text class="dialog-1-orange">3300</text>
+            <text class="dialog-1-black">移动积分兑换</text>
+            <text class="dialog-1-orange">海龙燃油宝65ml券</text>
+            <text class="dialog-1-black">？</text>
+        </view>
+
+        <view class="dialog-1-btn">
+            <button class="dialog-1-btn-cancel" bindtap="closeGuideModal">取消</button>
+            <button class="dialog-1-btn-sure" bindtap="sureChange">确认兑换</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-1" wx:if="{{type==2}}">
+        <view class="dialog-1-image">
+            <image src="http://static.100bm.cn/jifen/pop-ico.png"></image>
+        </view>
+
+        <view class="dialog-2-content">
+            <text class="dialog-1-center">积分兑换失败，请查看失败原因！</text>
+        </view>
+
+        <view class="dialog-1-btn">
+            <button class="dialog-1-btn-cancel" bindtap="closeGuideModal">取消</button>
+            <button class="dialog-1-btn-sure">确认兑换</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-1" wx:if="{{type==3}}">
+        <view class="dialog-1-image">
+            <image src="http://static.100bm.cn/jifen/pop-ico.png"></image>
+        </view>
+
+        <view class="dialog-2-content">
+            <text class="dialog-1-center">移动积分过少，无优惠券可兑换</text>
+        </view>
+
+        <view class="dialog-1-btn">
+            <button class="dialog-1-btn-ok" bindtap="closeGuideModal">我知道了</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-1" wx:if="{{type==4}}">
+        <view class="dialog-1-image">
+            <image src="http://static.100bm.cn/jifen/pop-ico.png"></image>
+        </view>
+
+        <view class="dialog-1-content">
+            <text class="dialog-1-black">请确认使用</text>
+            <text class="dialog-1-orange">3300</text>
+            <text class="dialog-1-black">移动积分兑换</text>
+            <text class="dialog-1-orange">海龙燃油宝65ml券</text>
+            <text class="dialog-1-black">？</text>
+        </view>
+
+        <view class="dialog-1-desc">
+            <text>验证码超时，请重新获取验证码确认兑换！</text>
+        </view>
+
+        <view class="dialog-1-code">
+            <input type="number" maxlength="6" placeholder="请输入短信验证码"/>
+            <view class="dialog-1-line"></view>
+            <text>获取验证码</text>
+        </view>
+
+        <view class="dialog-1-btn">
+            <button class="dialog-1-btn-cancel" bindtap="closeGuideModal">取消</button>
+            <button class="dialog-1-btn-sure" bindtap="sureChange">确认兑换</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-1" wx:if="{{type==5}}">
+        <view class="dialog-1-image">
+            <image src="http://static.100bm.cn/jifen/pop-ico.png"></image>
+        </view>
+
+        <view class="dialog-1-content">
+            <text class="dialog-1-black">请确认在线付款</text>
+            <text class="dialog-1-orange">¥{{orderPrice}}</text>
+            <text class="dialog-1-black">购买</text>
+            <text class="dialog-1-orange">{{productInfo.product_name}}×{{orderNum}}</text>
+            <text class="dialog-1-black">！购买后将获取得提货券，前往便利店，将券信息出示给收银员即可提货。</text>
+        </view>
+
+        <view class="dialog-1-btn">
+            <button class="dialog-1-btn-sure" bindtap="sureBuy">确认购买</button>
+            <button class="dialog-1-btn-cancel" bindtap="closeGuideModal">取消</button>           
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-question" wx:if="{{type==6}}">
+
+        <view class="dialog-question-content">
+            <text>1.发票金额只计算支持开发票的商品，因此可能存在发票金额与订单总价不等的情况。</text>
+            <text>2.确认收货7天后，才可以申请开具发票，在“我的->发票信息”中进行申请。</text>
+            <text>3.申请发票有效期：确认收货后3个月内可申请，过期作废。</text>
+            <text>4.申请发票，需额外支付10元运费。</text>
+        </view>
+
+        <view class="dialog-question-btn">
+            <button class="dialog-question-btn-close" bindtap="gotoCloseDialog">关闭</button>         
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-question" wx:if="{{type==7}}">
+
+        <view class="dialog-question-title">
+            <text>确认收货</text>
+        </view>
+    
+        <view class="dialog-question-tip">
+            <text>请确认是否已收到商品！</text>
+        </view>
+
+        <view class="dialog-question-btn">
+            <button class="dialog-question-btn-cancel" bindtap="gotoCloseDialog">取消</button>
+            <view class="dialog-question-btn-line">加</view>
+            <button class="dialog-question-btn-sure" bindtap="gotoReply">确认收货</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-question" wx:if="{{type==8}}">
+
+        <view class="dialog-question-title">
+            <text>申请退款</text>
+        </view>
+    
+        <view class="dialog-question-tip">
+            <text>请确认取消此订单？工作人员将会在3个工作日内进行审核</text>
+        </view>
+
+        <view class="dialog-question-btn">
+            <button class="dialog-question-btn-cancel" bindtap="gotoCloseDialog">取消</button>
+            <view class="dialog-question-btn-line">加</view>
+            <button class="dialog-question-btn-sure" bindtap="gotoApply">确认申请</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-question" wx:if="{{type==9}}">
+
+        <view class="dialog-question-title">
+            <text>提示</text>
+        </view>
+    
+        <view class="dialog-question-tip">
+            <text>确定删除此收货地址吗？</text>
+        </view>
+
+        <view class="dialog-question-btn">
+            <button class="dialog-question-btn-cancel" bindtap="gotoCloseDialog">取消</button>
+            <view class="dialog-question-btn-line">加</view>
+            <button class="dialog-question-btn-sure" bindtap="gotoDel">确认删除</button>
+        </view>
+    </view>
+
+    <view animation="{{_modal.vAnimationData}}" mode="aspectFit" class="dialog-question" wx:if="{{type==10}}">
+
+        <view class="dialog-question-title">
+            <text>提示</text>
+        </view>
+    
+        <view class="dialog-question-tip">
+            <text>确定删除此发票抬头吗？</text>
+        </view>
+
+        <view class="dialog-question-btn">
+            <button class="dialog-question-btn-cancel" bindtap="gotoCloseDialog">取消</button>
+            <view class="dialog-question-btn-line">加</view>
+            <button class="dialog-question-btn-sure" bindtap="gotoDel">确认删除</button>
+        </view>
+    </view>
+</view>

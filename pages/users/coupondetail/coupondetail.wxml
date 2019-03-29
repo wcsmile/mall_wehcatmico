@@ -1,0 +1,41 @@
+<view class="detail-container">
+    <scroll-view sroll-y>
+        <view class="detail-top">
+            <view class="detail-content">
+                <view>
+                    <text class="detail-bold-litter">¥</text>
+                    <text class="detail-bold">{{face}}</text>
+                </view>
+                <text class="detail-bold-litter">{{name}}</text>
+                <text class="detail-litter" wx:if="{{minimum_amount != 0}}">满{{minimum_amount}}元可用</text>
+            </view>
+            <view class="detail-line"></view>
+            <view class="detail-desc">
+                <text>有效期：{{startTime}} ～ {{endTime}}</text>
+                <text>{{status}}</text>
+            </view>
+        </view>
+
+        <view class="detail-center" wx:if="{{couponNo}}">
+            <text>券编码：{{couponNo}}</text>
+            <canvas canvas-id="couponNoCanvas"/>
+        </view>
+
+        <view class="detail-center" wx:if="{{validcode}}">
+            <text>校验码：{{validcode}}</text>
+            <canvas canvas-id="validcodeCanvas"/>
+        </view>
+
+        <view class="detail-bottom">
+            <text class="detail-tip">使用说明</text>
+            <text>1.单次交易仅可使用1张，不可累加使用</text>
+            <text>2.仅限四川石油分公司所属易捷便利店使用</text>
+            <text>3.使用时请向便利店收银员出示，仅限本人使用</text>
+            <view class="detail-bottom-phone">
+                <text>4.客服电话：</text>
+                <text class="detail-phone" bindtap="callPhone" data-phone="{{phone}}">{{phone}}</text> /
+                <text class="detail-phone" bindtap="callPhone" data-phone="{{anotherPhone}}">{{anotherPhone}}</text>
+            </view>
+        </view>
+    </scroll-view>
+</view>

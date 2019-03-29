@@ -1,0 +1,65 @@
+<view class="inputinvoice-container">
+    <view class="inputinvoice-item-items">
+        <text class="inputinvoice-item-tip">发票信息</text>
+        <view style="width: 100%; display: flex; flex-direction: column; padding: 0 20rpx; box-sizing: border-box;">
+            <text class="inputinvoice-invoice-type">发票类型：<text style="color: #333;">普通发票</text></text>
+            <view class="inputinvoice-invoice">
+                <text>发票抬头：</text>
+            </view>
+
+            <view class="submitorder-address" style="padding: 0rpx;" bindtap="chooseTt">
+                <view class="submitorder-addr-no">
+                    <text wx:if="{{!invoiceName}}">请选择发票抬头！</text>
+                </view>
+                <view class="submitorder-address-items" wx:if="{{invoiceName}}">
+                    <text>{{invoiceName}}</text>
+                    <text style="margin-top:6rpx; color: #b1b1b1;" wx:if="{{invoiceType == 2}}">税号:{{invoiceCode}}</text>
+                    <text style="margin-top:6rpx; color: #b1b1b1;" wx:if="{{invoiceType != 2}}">个人抬头</text>
+                </view>
+                <i class="iconfont icon-right-arrow"></i>
+            </view>
+        </view>
+    </view>
+
+    <view class="inputinvoice-item">
+        <text class="inputinvoice-item-tip">收件信息</text>
+        <view class="submitorder-address" bindtap="chooseAddress">
+            <view class="submitorder-addr-no">
+                <text wx:if="{{!receivingName}}">请填写收货信息！</text>
+            </view>
+            <view class="submitorder-address-items" wx:if="{{receivingName}}">
+                <text>{{receivingName}}<text style="margin-left: 20rpx;">{{reveivingPhone}}</text></text>
+                <text>{{receivingProvinceName}}{{receivingCityName}}{{receivingAreaName}}{{receivingTownName}}{{receivingAddress}}</text>
+            </view>
+            <i class="iconfont icon-right-arrow"></i>
+        </view>
+    </view>
+
+    <view class="inputinvoice-item-items">
+        <text class="inputinvoice-item-tip">发票金额</text>
+        <view class="inputinvoice-money">
+            <text class="inputinvoice-money-tip">商品发票金额：</text>
+            <text>¥{{payAmounts}}</text>
+        </view>
+        <view class="inputinvoice-money">
+            <text class="inputinvoice-money-tip">运费发票金额：</text>
+            <text>¥{{postages}}</text>
+        </view>
+        <view class="inputinvoice-money" style="margin-bottom: 20rpx;">
+            <text class="inputinvoice-money-tip">发票总金额：</text>
+            <text>¥{{totalMoney}}</text>
+        </view>
+    </view>
+
+    <view class="charge-empty"></view>
+
+    <view class="updateaddr-add">
+        <view bindtap="gotoSure">确认开票</view>
+    </view>
+
+    <view class="charge-tip">
+        <text>温馨提示：</text>
+        <text>发票由石化省公司统一开具并配送，需额外支付10元运费</text>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

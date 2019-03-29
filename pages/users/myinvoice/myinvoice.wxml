@@ -1,0 +1,59 @@
+<view class="myinvoice-container">
+    <view class="myinvoice-top">
+        <view class="card-empty"></view>
+
+        <view class="myinvoice-top-tip" hidden>
+            <text bindtap="gotoHistory">开票历史</text>
+        </view>
+
+        <view class="myinvoice-top-tip">
+            <text class="myinvoice-top-tip-text">提示:申请开票时,需在线支付发票运费10元;\n纸质发票将由中国石化四川省公司开具,并通过快递物流配送.</text>
+        </view>
+
+        <view class="card-empty" style="height: 20rpx;"></view>
+
+        <block>
+            <view class="myinvoice-empty" wx:if="{{invoiceList.length==0}}">
+                <image src="http://static.100bm.cn/mall/ui/default/ic_no_invoice.png"></image>
+                <text>当前暂无订单可开发票</text>
+            </view>
+            <view class="myinvoice-items" wx:if="{{invoiceList.length>0}}" wx:for="{{invoiceList}}" wx:key="{{invoiceItem.main_order_id}}" wx:for-item="invoiceItem">
+                <view class="myinvoice-items-date">
+                    <text>{{invoiceItem.date_name}}</text>
+                </view>
+            
+                <view class="myinvoice-item" wx:for="{{invoiceItem.data}}" wx:key="{{index}}" bindtap="gotoOrderDetail" data-index="{{item.main_order_id}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!item.ischecked}}" catchtap="changeStatus" data-type="1" data-date="{{invoiceItem.date_name}}" data-index="{{index}}"></image>
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{item.ischecked}}" catchtap="changeStatus" data-type="2" data-date="{{invoiceItem.date_name}}" data-index="{{index}}"></image>
+                    <view class="myinvoice-item-order">
+                        <text>{{item.create_time}}</text>
+                        <text style="color: #888; font-size: 28rpx;">{{item.product_counts}}</text>
+                    </view>
+                    <view class="myinvoice-item-money">
+                        <text>{{item.pay_amounts}}元</text>
+                    </view>
+                </view>
+            </view>
+
+            <view class="myinvoice-tip" wx:if="{{invoiceList.length!=0}}">
+                <text>无更多发票，仅确认收货3个月内订单可开发票</text>
+            </view>
+        </block>
+    </view>
+
+    <view class="shoppingcar-bottom" wx:if="{{invoiceList.length!=0}}">
+        <view class="shoppingcar-bottom-money">
+            <view class="shoppingcar-bottom-choose">
+                <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!isChecked}}" bindtap="changeAll" data-type="1"></image>
+                <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{isChecked}}" bindtap="changeAll" data-type="2"></image>
+                <text style="line-height: 100rpx; margin-left: 10rpx;">全选</text>
+            </view>
+            <view class="shoppingcar-bottom-moneys">
+                <text style="font-size: 28rpx; color: #888;" hidden>不含运费</text>
+                <text style="margin-left: 20rpx;">合计：<text style="color: #ff3333; font-size: 36rpx; font-weight: 600;">¥{{totalMoney}}</text></text>
+            </view>
+        </view>
+        <view class="shoppingcar-bottom-gotopay" bindtap="gotoNext">下一步</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

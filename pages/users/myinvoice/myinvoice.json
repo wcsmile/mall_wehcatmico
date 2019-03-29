@@ -1,0 +1,5 @@
+{
+    "backgroundColor": "#fff",
+    "navigationBarTitleText": "发票信息",
+    "enablePullDownRefresh": true
+}

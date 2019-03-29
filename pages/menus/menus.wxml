@@ -1,0 +1,30 @@
+<!--主盒子-->
+<view class="container" wx:if="{{menusList.length > 0}}">
+    <!--左侧栏-->
+    <scroll-view scroll-y class="nav_left">
+        <block wx:for="{{menusList}}" wx:key="{{index}}">
+            <!--当前项的id等于item项的id，那个就是当前状态-->
+            <!--用data-index记录这个数据在数组的下标位置，使用data-id设置每个item的id值，供打开2级页面使用-->
+            <view class="nav_left_items {{curNav == item.menus_data.data.class_id ? 'active' : ''}}" bindtap="switchRightTab" data-index="{{index}}" data-id="{{item.menus_data.data.class_id}}">  
+                <image src="{{item.menus_data.data.logo_url}}"></image>
+                <text>{{item.menus_data.data.class_name}}</text>
+            </view>
+        </block>
+    </scroll-view>
+    <!--右侧栏-->
+    <scroll-view scroll-y class="nav_right">
+        <!--如果有数据，才遍历项-->
+        <view>
+            <view class="nav_right-data" wx:if="{{menusData.length > 0}}" wx:for="{{menusData}}" wx:key="{{menusItem.data[0].class_id}}" wx:for-item="menusItem">
+                <text class="nav_right-title">{{menusItem.data[0].class_name}}</text>
+                <view class="nav_right_items">
+                    <view class="nav_right_item" wx:for="{{menusItem.subdata}}" wx:key="{{index}}" bindtap="chooseGoods" data-id="{{item.class_id}}" data-name="{{item.class_name}}">
+                        <text>{{item.class_name}}</text>
+                    </view>
+                </view>
+            </view>
+            <!--如果无数据，则显示数据-->
+            <view class="nodata_text" wx:if="{{menusList[curIndex].subdata.length == 0}}">该分类暂无数据</view>
+        </view>
+    </scroll-view>
+</view>

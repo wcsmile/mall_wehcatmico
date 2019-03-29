@@ -1,0 +1,24 @@
+<view class="coupon-container">
+    <view class="coupon-box">
+        <view class="coupon-icon">
+            <image src="http://static.100bm.cn/jifen/success.png"></image>
+        </view>
+        <view>
+            <text class="coupon-finish">完成</text>
+        </view>
+        <view class="coupon-text">
+            <text class="font-blod">燃油宝兑换成功!</text>
+            <text>请向便利店出示该券，以便兑换商品</text>
+        </view>
+        <view class="coupon-btn">
+            <button>立即提货</button>
+        </view>
+
+    </view>
+    <view class="coupon-desc">
+        <view>
+            <text>提货券已放入优惠券包</text>
+            <text class="coupon-look">立即查看</text>
+        </view>
+    </view>
+</view>

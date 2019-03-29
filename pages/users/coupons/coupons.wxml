@@ -1,0 +1,101 @@
+<include src="/templates/dialog.wxml" />
+<view class="coupons-container">
+    <view class="coupons-top">
+        <view class="coupons-choose-tab" wx:if="{{clickTab == 0}}">
+            <view class="coupons-choose-item">
+                <a class="active">全部</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="1" bindtap="switchTab">未使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="2" bindtap="switchTab">已使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="3" bindtap="switchTab">已过期</a>
+            </view>
+        </view>  
+        <view class="coupons-choose-tab" wx:if="{{clickTab == 1}}">
+            <view class="coupons-choose-item">
+                <a data-type="0" bindtap="switchTab">全部</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a class="active">未使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="2" bindtap="switchTab">已使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="3" bindtap="switchTab">已过期</a>
+            </view>
+        </view>  
+        <view class="coupons-choose-tab" wx:if="{{clickTab == 2}}">
+            <view class="coupons-choose-item">
+                <a data-type="0" bindtap="switchTab">全部</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="1" bindtap="switchTab">未使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a class="active">已使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="3" bindtap="switchTab">已过期</a>
+            </view>
+        </view>
+        <view class="coupons-choose-tab" wx:if="{{clickTab == 3}}">
+            <view class="coupons-choose-item">
+                <a data-type="0" bindtap="switchTab">全部</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="1" bindtap="switchTab">未使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a data-type="2" bindtap="switchTab">已使用</a>
+            </view>
+            <view class="coupons-choose-item">
+                <a class="active">已过期</a>
+            </view>
+        </view>
+    </view>
+
+    <view class="coupons-containers">
+        <block wx:if="{{requestComplete}}">
+            <view class="coupons-empty" wx:if="{{vCurrentCouponList.length==0}}">
+                <image src="http://static.100bm.cn/mall/ui/default/no-data.png" mode="widthFix"></image>
+                <text>暂无提货券</text>
+            </view>
+            <view wx:if="{{vCurrentCouponList.length>0}}" class="coupons-item" wx:for="{{vCurrentCouponList}}" wx:key="{{index}}">
+                <view class="coupons-left" wx:if="{{item.status == 0}}">
+                    <view class="coupons-left-item">
+                        <view>
+                            <text style="font-weight: 600;">¥<text class="coupons-price">{{item.face}}</text></text>
+                        </view>
+                        <view>
+                            <text class="coupons-use" wx:if="{{item.minimum_amount != 0}}">满{{item.minimum_amount}}元可用</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="coupons-left-used" wx:if="{{item.status != 0}}">
+                    <view class="coupons-left-item">
+                        <view>
+                            <text>¥<text class="coupons-price">{{item.face}}</text></text>
+                        </view>
+                        <view>
+                            <text class="coupons-use" wx:if="{{item.minimum_amount != 0}}">满{{item.minimum_amount}}元可用</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="coupons-right">
+                    <text class="coupons-name">{{item.title}}</text>
+                    <view class="coupons-right-date">
+                        <text class="coupons-date" wx:if="{{item.status == 0}}">{{item.expire_start_time}}~<text>{{item.expire_end_time}}</text></text>
+                        <text class="coupons-date" wx:if="{{item.status == 1}}">{{item.create_time}}  <text>{{item.statusDesc}}</text></text>
+                        <text class="coupons-date" wx:if="{{item.status == 2}}">{{item.expire_end_time}}  <text>{{item.statusDesc}}</text></text>
+                        <text class="coupons-button" bindtap="gotoUse" data-index="{{index}}" wx:if="{{item.status == 0}}">立即使用</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

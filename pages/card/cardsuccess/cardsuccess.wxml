@@ -1,0 +1,17 @@
+<view class="buysuccess-containers">
+    <view class="buysuccess-top">
+        <view class="buysuccess-top-image">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_success.png"></image>
+        </view>
+        <text></text>
+        <text class="buysuccess-top-tip">办卡申请提交成功</text>
+    </view>
+
+    <view class="buysuccess-middle">
+        <text>已经成功提交加油卡办理申请，我们会尽快对申请资料进行审核，审核成功后会给您邮寄过来，请关注审核结果与物流信息。</text>  
+        <view class="buysuccess-middle-btn">
+            <button bindtap="gotoOrderList">查看订单</button>
+            <button hidden class="buysuccess-middle-back" bindtap="gotoHome">返回首页</button>
+        </view>
+    </view>
+</view>

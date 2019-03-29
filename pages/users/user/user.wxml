@@ -1,0 +1,58 @@
+<view class="user-container">
+    <view class="user-header">
+        <view class="user-info">
+            <view class="user-pic" wx:if="{{nickName}}">
+                <image src="{{avatarUrl}}"></image>
+            </view>
+            <view wx:if="{{nickName}}" class="user-name">
+                <text>{{nickName}}</text>
+                <text class="user-integral">积分：{{userOrderInfo.can_use_point}}</text>
+            </view>
+        </view>
+        <view wx:if="{{!nickName}}" class="user-login">
+            <button wx:if="{{currentCode||getUserInfoComplete}}" open-type="getUserInfo" bindgetuserinfo="getUserInfoHandler" bindtap="checkApi">点击登录</button>
+        </view>
+    </view>
+
+    <view class="user-menus">
+        <view class="user-menus-item" wx:for="{{menusList}}" wx:key="index" bindtap="gotoMenus" data-index="{{index}}">
+            <image src="{{item.image}}"></image>
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+
+    <view class="charge-empty"></view>
+
+    <view class="user-items"> 
+        <view class="user-item" bindtap="myDistribution" hidden>
+            <image class="user-icon" src="http://static.100bm.cn/mall/ui/default/ic_coupon.png"></image>
+            <text>分销中心</text>
+            <i class="iconfont icon-right-arrow"></i>
+        </view>
+        <view class="user-item" bindtap="myOrder">
+            <image class="user-icon" src="http://static.100bm.cn/mall/ui/default/ic_order_recorder.png"></image>
+            <text>订单记录</text>
+            <view class="user-count">
+                <text wx:if="{{userOrderInfo.sending_count>0}}">{{userOrderInfo.sending_count}}件派送中</text>
+                <text wx:if="{{userOrderInfo.wait_receive_count>0}}">{{userOrderInfo.wait_receive_count}}件待收货</text>
+            </view>
+            
+            <i class="iconfont icon-right-arrow"></i>
+        </view>
+        <view class="user-item" bindtap="myRecord" wx:if="{{isShowRecord}}">
+            <image class="user-icon" src="http://static.100bm.cn/mall/ui/default/ic-voucher.png"></image>
+            <text>兑换记录</text>
+            <i class="iconfont icon-right-arrow"></i>
+        </view>
+        <view class="user-item" bindtap="myAddress">
+            <image class="user-icon" src="http://static.100bm.cn/mall/ui/default/ic_address.png"></image>
+            <text>收货地址管理</text>
+            <i class="iconfont icon-right-arrow"></i>
+        </view>
+        <view class="user-item" bindtap="myQuestion">
+            <image class="user-icon" src="http://static.100bm.cn/mall/ui/default/ic_question.png?v=1"></image>
+            <text>常见问题</text>
+            <i class="iconfont icon-right-arrow"></i>
+        </view>
+    </view>
+</view>

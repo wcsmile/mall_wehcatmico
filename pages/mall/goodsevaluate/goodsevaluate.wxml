@@ -1,0 +1,45 @@
+<view class="goodsevaluate-container">
+    <view class="goodsevaluate-top">
+        <image class="goodsevaluate-cover" src="{{productInfo.cover_img}}"></image>
+        <view class="goodsevaluate-goods-name">
+            <text>{{productInfo.product_name}}</text>
+            <view class="goodsevaluate-star">
+                <block wx:for="{{nowEvaluateNum}}" wx:key="{{index}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_star_on.png"></image>
+                </block>
+                <block wx:if="{{nowHalfEvaluateNum}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_star_half.png"></image>
+                </block>
+                <block wx:if="{{noEvaluateNum}}" wx:for="{{noEvaluateNum}}" wx:key="{{index}}"> 
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_star.png"></image>
+                </block>
+                <text style="font-size: 28rpx; color: #888; line-height: 40rpx; margin-left: 10rpx;">{{average_star_level}} (共{{productInfo.evaluateinfo.total_evaluate_count}}条评论)</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="goodsevaluate-content" wx:if="{{mGoodsEvaluateList.length > 0}}" wx:for="{{mGoodsEvaluateList}}" wx:key="{{index}}">
+        <view class="goodsevaluate-content-top">
+            <view class="goodsevaluate-content-top-left">
+                <image class="goodsevaluate-content-photo" src="{{item.customer_head_img}}"></image>
+                <text class="goodsevaluate-content-top-name">{{item.customer_nick}}</text>
+                <view class="goodsevaluate-star" style="margin: auto 0; margin-left: 10rpx;">
+                    <block wx:for="{{item.star_level}}" wx:key="{{index}}">
+                        <image style="width: 28rpx; height: 28rpx;" src="http://static.100bm.cn/mall/ui/default/ic_star_on.png" catchtap="addStar" id="{{index+1}}" data-in="add"></image>
+                    </block>
+                    <block wx:for="{{item.star_level_no}}" wx:key="{{index}}">
+                        <image style="width: 28rpx; height: 28rpx;" src="http://static.100bm.cn/mall/ui/default/ic_star.png" catchtap="addStar" id="{{index+1}}" data-in="minus"></image>
+                    </block>
+                </view>
+            </view>
+
+            <text class="goodsevaluate-content-top-date">{{item.create_time}}</text>
+        </view>
+        <view class="goodsevaluate-content-bottom">
+            <text>评论：{{item.evaluate_content}}</text>
+            <view class="goodsevaluate-content-bottom-reply" wx:if="{{item.reply_content.length != 0}}"> 
+                <text style="color: #888;">回复：{{item.reply_content}}</text>
+            </view>
+        </view>
+    </view>
+</view>

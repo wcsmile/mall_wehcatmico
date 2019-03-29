@@ -1,0 +1,17 @@
+<view class="buysuccess-containers">
+    <view class="buysuccess-top">
+        <view class="buysuccess-top-image">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_success.png"></image>
+        </view>
+        <text></text>
+        <text class="buysuccess-top-tip">推客申请提交成功</text>
+    </view>
+
+    <view class="buysuccess-middle">
+        <text>已向“惠生活优易购”提交了推客分销加盟申请，工作人员审核后，系统会第一时间将审核结果通过“我的”消息通知告知您，请密切关注</text>  
+        <view class="buysuccess-middle-btn">
+            <button bindtap="gotoOrderList" hidden>查看订单</button>
+            <button  class="buysuccess-middle-back" bindtap="gotoHome">返回首页</button>
+        </view>
+    </view>
+</view>

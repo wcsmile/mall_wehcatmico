@@ -1,0 +1,35 @@
+<!--提示框-->
+<view class="win-box" wx:if="{{_dialog_.tipState}}">
+    <view class="window-bg">
+        <!-- <view class="win-icon">
+            <i class="iconfont {{_dialog_.icon}}"></i>
+        </view> -->
+        <view>
+            <text>{{_dialog_.title}}</text>
+        </view>
+    </view>
+</view>
+
+<!--加载框-->
+<view class="zhe-bg-loading" wx:if="{{_dialog_.loadingState}}">
+    <view class="win-box">
+        <view class="window-bg">
+            <view>
+                <view class="m-load2">
+                    <view class="line">
+                        <view></view>
+                        <view></view>
+                        <view></view>
+                        <view></view>
+                        <view></view>
+                        <view></view>
+                    </view>
+                    <view class="circlebg"></view>
+                </view>
+            </view>
+            <view>
+                <text>{{_dialog_.title}}</text>
+            </view>
+        </view>
+    </view>
+</view>

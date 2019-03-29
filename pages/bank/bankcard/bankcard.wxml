@@ -1,0 +1,42 @@
+<view class="bank-container">
+    <view class="bank-top">
+        <view class="bank-top-name">
+            <image src="http://static.100bm.cn/mall/ui/default/ic_logo.jpg"></image>
+            <text>惠生活优易购</text>
+        </view>
+        <view class="bank-top-tip">
+            <text>成为商家推客，推荐给朋友</text>
+            <view style="margin-bottom: 30rpx;">
+                <text style="position: absolute;right: 60rpx;">轻松赚酬金</text>
+            </view>
+        </view>
+
+        <view class="bank-top-line"></view>
+
+        <view class="bank-top-reward">
+            <text>分销项目：兴业银行信用卡网申</text>
+            <text>酬金奖励：信用卡办卡申请审核通过奖励5元，首刷奖励10元</text>
+        </view>
+    </view>
+
+    <view class="bank-content">
+        <view class="bank-content-item">
+            <text>手机号</text>
+            <input style="width: 480rpx;" type="number" placeholder="请输入手机号码" maxlength="11" />
+        </view>
+        <view class="bank-content-item">
+            <text>图形码</text>
+            <input type="number" placeholder="请输入图形验证码" maxlength="4" />
+            <image></image>
+        </view>
+        <view class="bank-content-item">
+            <text>短信码</text>
+            <input type="number" placeholder="请输入短信验证码" maxlength="6" />
+            <text class="bank-content-getcode">获取验证码</text>
+        </view>
+    </view>
+
+    <view class="card-btn" bindtap="gotoJoin">
+        <view>立即申请加入</view>
+    </view>
+</view>

@@ -1,0 +1,23 @@
+<view>
+    <scroll-view scroll-y class="question-container">
+        <view class="question-empty" wx:if="{{mQuestionList.length==0}}">
+            <image src="http://static.100bm.cn/mall/ui/default/no-data.png" mode="widthFix"></image>
+            <text>暂无问题</text>
+        </view>
+        <block wx:for="{{mQuestionList}}" wx:key="{{index}}">
+            <view class="week-text-panel" bindtap="showDetail" data-index="{{index}}">
+                <text>{{item.question}}</text>
+                <a wx:if="{{!item.isShowDetail}}" class="a-icon-down">
+                    <i class="iconfont icon-icarrow color-i color-gray"></i>
+                </a>
+                <a wx:if="{{item.isShowDetail}}" class="a-icon-down">
+                    <i class="iconfont icon-uparrow color-i color-gray"></i>
+                </a>
+            </view>
+            <view class="week-sltext-panel" wx:if="{{item.isShowDetail}}">
+                <text class="rule-s" space="nbsp">{{item.answer}}</text>
+            </view>
+        </block>
+        <view class="add-line" wx:if="{{mQuestionList.length>0}}"></view>
+    </scroll-view>
+</view>

@@ -1,0 +1,56 @@
+<include src="/templates/guidemodal.wxml" />
+<view class="goods-container">
+    <view class="goods-content">
+        <view>
+            <text class="goods-content-black">手机号</text>
+            <text class="goods-content-orange">13656565656</text>
+            <text class="goods-content-black">的积分余额</text>
+            <text class="goods-content-orange">30000</text>
+        </view>
+    </view>
+    <scroll-view sroll-y>
+        <view class="goods-list">
+            <block wx:if="{{requestComplete}}">
+                <view class="goods-empty" wx:if="{{mGoodsList.length==0}}">
+                    <image src="http://static.100bm.cn/mall/ui/default/ic-order-empty.png" mode="widthFix"></image>
+                    <text>暂无商品</text>
+                </view>
+                <view wx:if="{{mGoodsList.length>0}}" class="goods-items" wx:for="{{mGoodsList}}" wx:key="goods_no" bindtap="showDialog">
+                    <view wx:if="{{item.goods_ischange}}" class="goods-item">
+                        <view class="goods-top">
+                            <view>
+                                <text class="goods-jifen">{{item.goods_jifen}}</text>
+                                <text>积分</text>
+                            </view>
+                        </view>
+                        <view class="goods-middle">
+                            <image src="{{item.goods_image}}" />
+                        </view>
+                        <view class="goods-bottom">
+                            <text class="goods-name">{{item.goods_name}}</text>
+                            <text class="goods-price">{{item.goods_price}}元</text>
+                        </view>
+                    </view>
+                    <view wx:if="{{!item.goods_ischange}}" class="goods-item-no">
+                        <view class="goods-top-no">
+                            <view class="goods-jifens">
+                                <text class="goods-jifen">{{item.goods_jifen}}</text>
+                                <text>积分</text>
+                            </view>
+                            <view class="goods-jifen-no">
+                                <text class="goods-jifen-no-des">积分不足</text>
+                            </view>
+                        </view>
+                        <view class="goods-middle">
+                            <image src="{{item.goods_image}}" />
+                        </view>
+                        <view class="goods-bottom">
+                            <text class="goods-name">{{item.goods_name}}</text>
+                            <text class="goods-price">{{item.goods_price}}元</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

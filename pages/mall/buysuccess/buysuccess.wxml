@@ -1,0 +1,31 @@
+<view class="goodsbuy-containers">
+    <view class="goodsbuy-top">
+        <image src="http://static.100bm.cn/mall/ui/default/ic_succeed.png"></image>
+        <text>购买成功</text>
+    </view>
+
+    <view class="goodsbuy-middle" wx:for="{{productData}}" wx:key="{{index}}">
+        <view class="goodsbuy-middle-name-item">
+            <text class="goodsbuy-middle-name">{{item.product_name}}</text>
+            <text class="goodsbuy-middle-tip" wx:if="{{(item.product_flag & 32) == 32}}">(自提商品)</text>
+        </view>
+        <text class="goodsbuy-middle-num">×{{item.product_count}}件</text>
+    </view>
+    <view class="goodsbuy-middle">
+        <text class="goodsbuy-middle-name">实际付款</text>
+        <text class="goodsbuy-middle-money">¥{{totalMoney}}</text>
+    </view>
+
+    <view class="goodsbuy-bottom">
+        <view class="goodsbuy-bottom-btn">
+            <button wx:if="{{type == 3000}}" bindtap="gotoGoodsOrder">查看订单</button>
+            <button wx:if="{{type == 3002}}" bindtap="gotoInvoice">查看发票</button>
+            <button class="goodsbuy-bottom-back" bindtap="gotoHome">返回商城首页</button>
+        </view>
+        
+        <view class="goodsbuy-bottom-tip" wx:if="{{isShow}}">
+            <text>已购买到店自提商品</text>
+            <text style="color: #ff3333;" bindtap="gotoGoodsCoupon">查看提货券</text>
+        </view>
+    </view>
+</view>

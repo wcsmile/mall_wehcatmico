@@ -1,0 +1,11 @@
+.invoice-station-top{
+    height: 151rpx;
+}
+.invoice-station-top image{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;  
+  color: #bebcbc; 
+  right: 12px;
+  margin-top: 56rpx;
+}

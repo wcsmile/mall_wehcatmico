@@ -1,0 +1,95 @@
+<view class="shoppingcar-container">
+    <view class="shoppingcar-oper-item">
+        <view class="shoppingcar-choose-tab" wx:if="{{clickTab == 0}}">
+            <view class="shoppingcar-choose-item">
+                <a class="active">配送商品</a>
+            </view>
+            <view class="shoppingcar-choose-item">
+                <a data-type="1" bindtap="switchTab">自提商品</a>
+            </view>
+        </view>  
+        <view class="shoppingcar-choose-tab" wx:if="{{clickTab == 1}}">
+            <view class="shoppingcar-choose-item">
+                <a data-type="0" bindtap="switchTab">配送商品</a>
+            </view>
+            <view class="shoppingcar-choose-item">
+                <a class="active">自提商品</a>
+            </view>
+        </view>  
+    </view>
+
+    <view class="shoppingcar-top" wx:if="{{requestComplete}}">  
+        <view class="coupons-empty" wx:if="{{vCurrentShoppingCarList.length==0 && vCurrentShoppingCarNoUseList.length==0}}">
+            <image src="http://static.100bm.cn/mall/ui/default/no-data.png" mode="widthFix"></image>
+            <text>暂无商品</text>
+        </view>
+        <view class="shoppingcar-items" wx:if="{{vCurrentShoppingCarList.length>0}}" wx:for="{{vCurrentShoppingCarList}}" wx:key="{{cardItem.shop_id}}" wx:for-item="cardItem">  
+            <view class="shoppingcar-shopname">
+                <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!cardItem.is_checked}}" catchtap="chooseShopAll" data-type="1" data-id="{{cardItem.shop_id}}"></image>
+                <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{cardItem.is_checked}}" catchtap="chooseShopAll" data-type="2" data-id="{{cardItem.shop_id}}"></image>
+                <image style="margin-left: 20rpx;" src="{{cardItem.shop_logo}}"></image>
+                <text>{{cardItem.shop_name}}</text>
+            </view>
+            <view wx:for="{{cardItem.data}}"  wx:key="{{index}}"  class="shoppingcar-item" wx:for-item="item" bindtap="gotoOrderdetail" data-tags="{{item.activity_tag}}" data-ids="{{item.product_id}}">  
+                <view class="inner txt" animation="{{item.s_animation}}" bindtouchstart="touchS" bindtouchmove="touchM" data-index="{{index}}" data-id="{{item.product_id}}" data-type="use">  
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!item.ischecked}}" catchtap="changeStatus" data-type="1" data-id="{{item.product_id}}" data-index="{{index}}"></image>
+                    <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{item.ischecked}}" catchtap="changeStatus" data-type="2" data-id="{{item.product_id}}" data-index="{{index}}"></image>
+                    <image class="shoppingcar-icon" mode="widthFix" src="{{item.cover_img}}"></image>
+                    <view class="shoppingcar-goods">
+                        <text>{{item.product_name}}</text>
+                        <view class="shoppingcar-goods-item">
+                            <text style="line-height: 50rpx;color: #ff3333;font-size: 32rpx;">¥{{item.sale_prices}}</text>
+                            <view class="order-dialog-middle-num" style="right: 40rpx;">
+                                <view class="order-dialog-middle-minus" catchtap="minusNum" data-id="{{item.product_id}}" data-index="{{index}}"><text>-</text></view>
+                                <text>{{item.product_count}}</text>
+                                <view class="order-dialog-middle-add" catchtap="addNum" data-id="{{item.product_id}}" data-index="{{index}}"><text>+</text></view>
+                            </view>
+                        </view>
+                    </view>
+                </view>  
+                <view data-index="{{index}}" data-id="{{item.product_id}}" catchtap = "delItem" data-type="use" class="inner del">删除</view>  
+            </view>
+
+            <view class="shoppingcar-item-activity" wx:for="{{cardItem.activity_list}}" wx:key="{{cardItem.activity_list.activity_id}}" wx:for-item="activityItem">
+                <text class="shoppingcar-item-activity-name">促销活动</text>
+                <text class="shoppingcar-item-activity-content">{{activityItem.activity_name}}</text>
+            </view>  
+            <view class="charge-empty"></view>
+        </view> 
+
+        <view class="shoppingcar-items" wx:if="{{vCurrentShoppingCarNoUseList.length > 0}}">
+            <view class="shoppingcar-shopname">
+                <text>失效商品</text>
+            </view>
+            <view wx:for="{{vCurrentShoppingCarNoUseList}}"  wx:key="{{index}}"  class="shoppingcar-item" bindtap="gotoOrderdetail" data-tags="{{item.activity_tag}}" data-ids="{{item.product_id}}">  
+                <view class="inner txt" animation="{{item.s_animation}}" bindtouchstart="touchS" bindtouchmove="touchM" data-index="{{index}}" data-id="{{item.product_id}}" data-type="nouse">  
+                    <text class="shoppingcar-nouse-tip">失效</text>
+                    <image class="shoppingcar-icon" mode="widthFix" src="{{item.cover_img}}"></image>
+                    <view class="shoppingcar-goods">
+                        <text style="color: #999;">{{item.product_name}}</text>
+                        <view class="shoppingcar-nouse-goods-item">
+                            <text style="line-height: 40rpx;color: #999;font-size: 32rpx;">¥{{item.sale_prices}}</text>
+                            <text style="line-height: 40rpx; color: #333; font-size: 28rpx;">该商品目前不能购买</text>
+                        </view>
+                    </view>
+                </view>  
+                <view data-index="{{index}}" data-id="{{item.product_id}}" catchtap = "delItem" data-type="nouse" class="inner del">删除</view>  
+            </view>
+        </view>
+    </view> 
+
+    <view class="shoppingcar-bottom" wx:if="{{vCurrentShoppingCarList.length>0}}">
+        <view class="shoppingcar-bottom-money">
+            <view class="shoppingcar-bottom-choose">
+                <image src="http://static.100bm.cn/mall/ui/default/ic_check.png" wx:if="{{!isChecked}}" bindtap="chooseAll" data-type="1"></image>
+                <image src="http://static.100bm.cn/mall/ui/default/ic_checked.png" wx:if="{{isChecked}}" bindtap="chooseAll" data-type="2"></image>
+                <text style="margin-left: 10rpx;">全选</text>
+            </view>
+            <view class="shoppingcar-bottom-moneys">
+                <text>合计：<text style="color: #ff3333; font-size: 36rpx; font-weight: 600;">¥{{totalMoney}}</text></text>  
+            </view>
+        </view>
+        <view class="shoppingcar-bottom-gotopay" bindtap="gotoSubmitOrder">去结算（{{totalNum}}）</view>
+    </view>
+</view>
+<include src="/templates/dialog.wxml" />

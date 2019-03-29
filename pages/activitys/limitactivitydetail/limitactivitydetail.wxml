@@ -1,0 +1,126 @@
+<include src="/templates/guidemodal.wxml" />
+<include src="/templates/dialog.wxml" />
+<view class="mall-goods-detail-container">
+    <block wx:if="{{requestComplate}}">
+        <view class="mall-goods-detail-container-view">
+            <view class="mall-goods-detail-top">
+                <image src="{{productInfo.cover_image}}" wx:if="{{imgUrls.length == 1}}"></image>
+
+                <swiper indicator-dots="true" wx:if="{{imgUrls.length > 1}}"
+                    autoplay="true" interval="3000" duration="500" circular="true" style="width: 750rpx; height: 750rpx;">
+                    <block wx:for="{{imgUrls}}" wx:key="index">
+                        <swiper-item>
+                            <image src="{{item}}"></image>
+                        </swiper-item>
+                    </block>
+                </swiper>
+                
+                <view class="limitactivity-item">
+                    <view class="limitactivity-item-left">
+                        <text style="color: #fff; font-size: 30rpx;">¥<text class="limitactivity-item-now-price">{{productInfo.activity_sale_price}}</text></text>
+                        <!-- <text wx:if="{{types == 0 || types == 2}}" style="color: #fff; font-size: 30rpx;">¥<text class="limitactivity-item-now-price">{{productInfo.sale_price}}</text></text> -->
+                        <text style="margin: 12rpx 0 0 20rpx;" class="limitactivity-item-old-price">¥{{productInfo.face}}</text>
+                        <view class="limitactivity-item-left-price" hidden>
+                            <text class="limitactivity-item-old-price">¥{{productInfo.face}}</text>
+                            <text class="limitactivity-item-left-num">已抢366件</text>
+                        </view>
+                    </view>
+                    <view class="limitactivity-item-right">
+                        <text>{{showTip}}</text>
+                        <text style="margin-top: 4rpx;">{{showTime}}</text>
+                    </view>
+                </view>
+                <view class="mall-goods-detail-desc"> 
+                    <view class="mall-goods-detail-name-item">  
+                        <view class="mall-goods-detail-name-view">                      
+                            <text class="mall-goods-detail-name">{{productInfo.product_name}}</text>
+                        </view>
+                        <view class="mall-goods-detail-collect" wx:if="{{!isCollect}}" bindtap="gotoCollect">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_attention.png"></image>
+                            <text>关注</text>
+                        </view>
+
+                        <view class="mall-goods-detail-collect" wx:if="{{isCollect}}" bindtap="gotoCollect">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_attention_on.png"></image>
+                            <text style="color: #ff3333;">已关注</text>
+                        </view>
+                    </view>
+                    <view>
+                        <text class="mall-goods-detail-rule" hidden>规格/单位：{{productInfo.product_spec}}</text>
+                    </view>
+                    <view hidden>
+                        <text class="mall-goods-detail-new-price">¥{{productInfo.sale_price}}</text>
+                        <text class="mall-goods-detail-price">¥{{productInfo.face}}</text>
+                    </view>
+
+                    <view class="mall-goods-detail-business-item">
+                        <text wx:if="{{(productInfo.product_flag & 16) == 16}}">商家配送</text>
+                        <text wx:if="{{(productInfo.product_flag & 32) == 32}}">自提</text>
+                        <text wx:if="{{(productInfo.product_flag & 16) == 16}}" style="margin-left: 16rpx;">| 发货地：{{productInfo.delivery_address}}</text>
+                    </view>
+                </view>
+            </view>
+
+            <block wx:if="{{productInfo.activity_info}}">
+                <view class="mall-goods-detail-empty"></view>
+                <view class="mall-goods-detail-business">
+                    <text style="margin-left: 0;" class="shoppingcar-item-activity-name">促销</text>
+                    <text class="shoppingcar-item-activity-content">{{productInfo.activity_info.activity_name}}</text>
+                </view>
+            </block>
+
+            <block wx:if="{{productInfo.giverule_info}}" style="border-top: 1rpx solid #f2f2f2;">
+                <view class="mall-goods-detail-business">
+                    <text style="margin-left: 0;" class="shoppingcar-item-activity-name">{{productInfo.giverule_info.activity_name}}</text>
+                    <text class="shoppingcar-item-activity-content">{{productInfo.giverule_info.activity_desc}}</text>
+                </view>
+            </block>
+
+            <block wx:if="{{productInfo.evaluateinfo}}">
+                <view class="mall-goods-detail-empty"></view>
+                <view class="mall-goods-detail-business" bindtap="gotoEvaluate">
+                    <view class="goodsevaluate-star">
+                        <block wx:for="{{nowEvaluateNum}}" wx:key="{{index}}">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_star_on.png"></image>
+                        </block>
+                        <block wx:if="{{nowHalfEvaluateNum}}">
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_star_half.png"></image>
+                        </block>
+                        <block wx:if="{{noEvaluateNum}}" wx:for="{{noEvaluateNum}}" wx:key="{{index}}"> 
+                            <image src="http://static.100bm.cn/mall/ui/default/ic_star.png"></image>
+                        </block>
+                        <text style="font-size: 28rpx; color: #888; line-height: 40rpx; margin-left: 10rpx;">{{average_star_level}}</text>
+                    </view>
+
+                    <view class="mall-goods-detail-evaluate">
+                        <text>{{productInfo.evaluateinfo.total_evaluate_count}}条评论</text>
+                        <i class="iconfont icon-right-arrow"></i>
+                    </view>
+                </view>
+            </block>
+
+            <view class="mall-goods-detail-empty"></view>
+            <view class="mall-goods-detail-business">
+                <image src="{{mallIcon}}"></image>
+                <text>商家：{{productInfo.shopinfo.shop_name}}</text>
+            </view>
+            <view class="mall-goods-detail-empty"></view>
+            <view class="mall-goods-detail-content">
+                <view class="mall-goods-detail-content-title">产品介绍</view>
+                <view class="mall-goods-detail-content-line"></view>
+                <view class="mall-goods-detail-content-image">
+                    <image src="{{item.image_url}}" wx:for="{{productInfo.images}}" wx:key="img_id" mode="widthFix" wx:if="{{item.image_type == 2}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="mall-goods-detail-bottom">
+            <view class="mall-goods-detail-bottom-price" bindtap="gotoCar">
+                <image src="http://static.100bm.cn/mall/ui/default/ic_shopping_cart.png"></image>
+                <text>购物车</text>
+            </view>
+            <view class="mall-goods-detail-bottom-join" bindtap="injoinCar">加入购物车</view>
+            <view class="mall-goods-detail-bottom-buy" bindtap="gotoSubmitOrder">立即购买</view>
+        </view>
+    </block>
+</view>
+<include src="/templates/order.wxml" />
